@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 17:39:07 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/18 19:57:45 by gafreita         ###   ########.fr       */
+/*   Created: 2022/10/17 15:39:40 by gafreita          #+#    #+#             */
+/*   Updated: 2022/10/18 19:53:47 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __PHONEBOOK_HPP__
-# define __PHONEBOOK_HPP__
+#ifndef __CONTACT_HPP__
+# define __CONTACT_HPP__
 
 #include "ex01.hpp"
-#include "contact.hpp"
 
-class PhoneBook {
+class contact {
 	public:
-	void add (void);
-	void search (std::string name);
+	void	new_contact(void);
+	void	print(void);
+	void	print_truncated(void);
 
 	private:
-	contact contacts[8];
+	std::string	first_name;
+	std::string	last_name;
+	std::string	nickname;
+	std::string	phone_number;
+	std::string	darkest_secret;
 };
 
 
 #endif
-

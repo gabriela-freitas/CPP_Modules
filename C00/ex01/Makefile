@@ -1,80 +1,45 @@
-# Makefile created automatically from script
+NAME = ex01
 
-# C++ ex01 [qui 13 out 2022 17:36:36 WEST]
+SRC =	./srcs/main.cpp \
+		./srcs/PhoneBook.cpp \
+		./srcs/contact.cpp
 
-MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
-NAME	=	ex01
+CC = c++
 
-SRC	=	$(wildcard srcs/*.cpp)
+INC = -I ./includes
 
-CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -pedantic -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
-INC	=	-I includes
+RM = rm -f
 
-OBJS_D	=	objs
+COLOUR_GREEN=\033[1;32m
+COLOUR_YELLOW=\033[1;33m
+COLOUR_GREY=\033[1;30m
+COLOUR_END=\033[0m
 
-OBJ	=	$(SRC:srcs/%.cpp=$(OBJS_D)/%.o)
+$(NAME): $(OBJS)
+		@ $(CC) $(FLAGS) $(INC) $(SRC) $(LIB) -o $(NAME)
+		@echo "$(COLOUR_GREEN) >> $(NAME) is ready to use $(COLOUR_END)"
 
-UNAME	:=	$(shell uname)
-
-RM		= rm -rf
-
-ifeq ($(UNAME), Darwin)
-	CC = c++
-else ifeq ($(UNAME), FreeBSD)
-	CC = clang++
-else
-	CC	= g++
-	CFLAGS += -D LINUX
-endif
-
-$(OBJS_D)/%.o:srcs/%.cpp
-			@mkdir -p $(OBJS_D)
-			$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-
-$(NAME):	$(OBJ)
-			@printf "Compiling $(C_YELLOW)$(NAME)$(C_END) ... \n"
-			$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-			@printf "$(C_GREEN)DONE$(C_END)\n"
-
-test:		re
-			@printf "$(C_BLUE)Testing $(C_YELLOW)$(NAME)$(C_END)\n"
-			@printf "\n$(C_BLUE)********************************************$(C_END)\n"
-			@./$(NAME)
-			@printf "\n$(C_BLUE)********************************************$(C_END)\n"
-			@printf "\n$(C_BLUE)Finished Test...$(C_END)\n"
-			@$(MAKE) show
-			@$(MAKE) fclean
-
-all:		$(NAME)
+all : $(NAME)
 
 clean:
-			$(RM) $(OBJS_D)
-			@printf "$(C_RED)Cleaning objs$(C_END)\n"
+		@ $(RM) $(NAME)
+		@echo "$(COLOUR_YELLOW) >> $(NAME) cleaned $(COLOUR_END)"
 
-fclean: 	clean
-			$(RM) $(NAME)
-			@printf "$(C_RED)Deleted Everything$(C_END)\n"
+exe: clean all
+		@echo "$(COLOUR_GREY) >> ./$(NAME) $(COLOUR_END)"
+		@./$(NAME)
 
-re: fclean all
+valgrind: clean all
+		valgrind ./$(NAME)
 
-show:
-	@printf "$(C_GREEN)"
-	@printf "UNAME		: $(UNAME)\n"
-	@printf "NAME  		: $(C_YELLOW)$(NAME)$(C_GREEN)\n"
-	@printf "CC		: $(CC)\n"
-	@printf "CFLAGS		: $(CFLAGS)\n"
-	@printf "INCLUDES	: $(INC)\n"
-	@printf "SRC		: $(C_YELLOW)$(SRC)$(C_GREEN)\n"
-	@printf "OBJ		: $(C_YELLOW)[$(OBJS_D)] --> $(OBJ)$(C_END)\n"
+valgrindfull: re
+		valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
-.PHONY: all test re
+re: clean all
 
-C_BLACK		= \033[0;30m
-C_RED		= \033[0;31m
-C_GREEN		= \033[0;32m
-C_YELLOW	= \033[0;33m
-C_BLUE		= \033[0;34m
-C_WHITE		= \033[0;37m
-C_END		= \033[0m
+.PHONY: clean all re
+
+
