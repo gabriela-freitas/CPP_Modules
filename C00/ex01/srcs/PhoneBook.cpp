@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:38:18 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/18 19:58:40 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/18 23:27:53 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ void PhoneBook::add(void)
 	index ++;
 }
 
-void PhoneBook::search(std::string name)
+void PhoneBook::search(void)
 {
-	if (name[0])
-		contacts[0].print_truncated();
+	std::cout << YELLOW << "Saved contacts:" << ENDC << std::endl;
+	for (int i = 0; i < 8; i++)
+		contacts[i].print_truncated(i);
+	std::cout << std::endl;
+	// TODO: Then, prompt the user again for the index of the entry to display. If the index
+	// is out of range or wrong, define a relevant behavior. Otherwise, display the
+	// contact information, one field per line.
 	contacts[0].print();
 }

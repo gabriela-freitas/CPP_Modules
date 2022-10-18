@@ -2,7 +2,7 @@ NAME = ex01
 
 SRC =	./srcs/main.cpp \
 		./srcs/PhoneBook.cpp \
-		./srcs/contact.cpp
+		./srcs/Contact.cpp
 
 
 CC = c++
