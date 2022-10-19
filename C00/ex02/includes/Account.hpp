@@ -12,6 +12,8 @@
 #ifndef __ACCOUNT_H__
 #define __ACCOUNT_H__
 
+#include <iostream>
+
 // ************************************************************************** //
 //                               Account Class                                //
 // ************************************************************************** //
@@ -39,7 +41,13 @@ public:
 	{
 		return (_totalNbWithdrawals);
 	};
-	static void	displayAccountsInfos( void );
+	static void	displayAccountsInfos( void )
+	{
+		_displayTimestamp();
+		std::cout << "accounts:" << _nbAccounts << ";total:" << _totalAmount << ";deposits:";
+		std::cout << _totalNbDeposits << ";withdrawals:" << _totalNbWithdrawals << std::endl;
+		return ;
+	};
 
 	Account( int initial_deposit );
 	~Account( void );
@@ -57,7 +65,11 @@ private:
 	static int	_totalNbDeposits;
 	static int	_totalNbWithdrawals;
 
-	static void	_displayTimestamp( void );
+	static void	_displayTimestamp( void )
+	{
+		std::cout << "[19920104_091532] ";
+		return ;
+	};
 
 	int				_accountIndex;
 	int				_amount;
