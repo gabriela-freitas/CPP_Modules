@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:38:58 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/19 13:21:39 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/19 23:24:21 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <string>
+#include <iomanip>
 #include "PhoneBook.hpp"
 
 # define BLACK	"\033[1;30m"

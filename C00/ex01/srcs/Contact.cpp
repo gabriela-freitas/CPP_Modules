@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:31:04 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/19 15:35:36 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/19 23:30:24 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ Contact::Contact()
 void	Contact::print_truncated(int index)
 {
 	if (this->fields[0].length())
-		std::cout << "         " << index << "|";
+	{
+		std::cout << std::setfill (' ') << std::setw (10);
+ 		std::cout << index << "|";
+	}
 	else
 		return ;
 	for (int i = 0; i < 3; i ++)
@@ -33,9 +36,8 @@ void	Contact::print_truncated(int index)
 			std::cout << this->fields[i].substr(0, 9) << ".";
 		else
 		{
-			for (int j = 0; j < (10 - (int)this->fields[i].length()); j++)
-				std::cout << " ";
-			std::cout << this->fields[i].substr(0, 10);
+			std::cout << std::setfill (' ') << std::setw (10);
+ 			std::cout << this->fields[i];
 		}
 		std::cout << "|";
 		if (i == 2)
