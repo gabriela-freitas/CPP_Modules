@@ -13,6 +13,9 @@
 #define __ACCOUNT_H__
 
 #include <iostream>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 
 // ************************************************************************** //
 //                               Account Class                                //
@@ -67,7 +70,13 @@ private:
 
 	static void	_displayTimestamp( void )
 	{
-		std::cout << "[19920104_091532] ";
+		// [YYYYMMDD_HHMMSS]
+		time_t t = std::time(0);
+		tm *ltm = localtime(&t);
+		std::cout << "[" << 1900 + ltm->tm_year << 1 + ltm->tm_mon << ltm->tm_mday;
+		std::cout << "_" << ltm->tm_hour << ltm->tm_min << ltm->tm_sec << "] ";
+		// For the eval
+		// std::cout << "[19920104_091532] ";
 		return ;
 	};
 
