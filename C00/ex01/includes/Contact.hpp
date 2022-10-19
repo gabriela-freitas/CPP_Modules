@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:39:40 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/18 23:22:07 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:39:33 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 #include "ex01.hpp"
 
+// The contact fields are:
+// [0] -> first name,
+// [1] -> last name,
+// [2] -> nickname,
+// [3] -> phone number,
+// [4] -> darkest secret
 class Contact {
 	public:
 	Contact();

@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:31:04 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/18 23:23:31 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:35:36 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 Contact::Contact()
 {
-	this->messages[0] = "first name";
-	this->messages[1] = "last name";
-	this->messages[2] = "nickname";
-	this->messages[3] = "phone number";
-	this->messages[4] = "darkest secret";
+	this->messages[0] = "First name";
+	this->messages[1] = "Last name";
+	this->messages[2] = "Nickname";
+	this->messages[3] = "Phone number";
+	this->messages[4] = "Darkest secret";
 }
 
 void	Contact::print_truncated(int index)
@@ -27,7 +27,7 @@ void	Contact::print_truncated(int index)
 		std::cout << "         " << index << "|";
 	else
 		return ;
-	for (int i = 0; i < 4; i ++)
+	for (int i = 0; i < 3; i ++)
 	{
 		if (this->fields[i].length() > 10)
 			std::cout << this->fields[i].substr(0, 9) << ".";
@@ -37,9 +37,8 @@ void	Contact::print_truncated(int index)
 				std::cout << " ";
 			std::cout << this->fields[i].substr(0, 10);
 		}
-		if (i < 3)
-			std::cout << "|";
-		else
+		std::cout << "|";
+		if (i == 2)
 			std::cout << std::endl;
 	}
 	return ;
@@ -48,7 +47,8 @@ void	Contact::print_truncated(int index)
 void	Contact::print(void)
 {
 	for (int i = 0; i < 5 ; i++)
-		std::cout << this->messages[i] << ": " << this->fields[i] << std::endl;
+		std::cout << "* " << this->messages[i] << ": " << this->fields[i] << std::endl;
+	std::cout << std::endl;
 }
 
 void	Contact::new_contact(void)
