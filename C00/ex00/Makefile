@@ -6,7 +6,7 @@
 #    By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 14:41:37 by gafreita          #+#    #+#              #
-#    Updated: 2022/10/12 17:44:13 by gafreita         ###   ########.fr        #
+#    Updated: 2022/10/19 16:07:12 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,5 +49,6 @@ valgrindfull: re
 
 re: clean all
 
-.PHONY: clean all re
+.PHONY: clean all re valgrind valgrindfull
+
 

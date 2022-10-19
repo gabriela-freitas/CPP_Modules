@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/10/19 16:07:27 by gafreita          #+#    #+#              #
+#    Updated: 2022/10/19 16:07:28 by gafreita         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = ex01
 
 SRC =	./srcs/main.cpp \
@@ -40,6 +52,7 @@ valgrindfull: re
 
 re: clean all
 
-.PHONY: clean all re
+.PHONY: clean all re valgrind valgrindfull
+
 
 
