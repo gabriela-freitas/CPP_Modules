@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:52:09 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/24 15:07:51 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:00:45 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **argv)
 			replace_file << str_temp;
 		}
 	}
+	std::cout << BLUE << argv[1] << ".replace created" << ENDC << std::endl;
 	return (0);
 }
 
@@ -60,5 +61,14 @@ int		open_files(std::string file_name, std::ofstream &replace_file, std::ifstrea
 
 void	replace_string(std::string &str_temp, std::string str_to_replace, std::string new_str)
 {
-	
+	std::size_t index = 0;
+
+	while (true)
+	{
+		index = str_temp.find(str_to_replace, index);
+		if (index == std::string::npos)
+			break ;
+		str_temp.erase(index, str_to_replace.length());
+		str_temp.insert(index, new_str);
+	}
 }

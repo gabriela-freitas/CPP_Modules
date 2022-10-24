@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:06:52 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/22 23:15:06 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:55:28 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 
 # define BLACK	"\033[0;30m"
 # define RED	"\033[0;31m"
