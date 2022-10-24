@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:52:09 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/22 23:23:05 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/24 15:07:51 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 #include "ex04.hpp"
 
-int		open_files(char *file_name, std::ofstream &replace_file, std::ifstream &original_file);
-void	replace_string(std::string &str_temp, char *str_to_replace, char *new_str);
+int		open_files(std::string file_name, std::ofstream &replace_file, std::ifstream &original_file);
+void	replace_string(std::string &str_temp, std::string str_to_replace, std::string new_str);
 
 int	main(int ac, char **argv)
 {
@@ -30,12 +30,35 @@ int	main(int ac, char **argv)
 		std::cout << BLUE << "Usage: [file_name] [str_to_replace] [new_str]" << ENDC << std::endl;
 	else
 	{
-		if (open_files(argv[2], replace_file, original_file))
+		if (open_files(argv[1], replace_file, original_file))
 		{
 			std::getline(original_file, str_temp, '\0');
 			replace_string(str_temp, argv[2], argv[3]);
-			replace_file << str_temp << EOF;
+			replace_file << str_temp;
 		}
 	}
 	return (0);
+}
+
+int		open_files(std::string file_name, std::ofstream &replace_file, std::ifstream &original_file)
+{
+	original_file.open(file_name.c_str());
+	if (!original_file.is_open())
+	{
+		std::cout << "Couldn't open file" << std::endl;
+		return (false);
+	}
+	file_name += ".replace";
+	replace_file.open(file_name.c_str());
+	if (!replace_file.is_open())
+	{
+		std::cout << "Couldn't create file" << std::endl;
+		return (false);
+	}
+	return (true);
+}
+
+void	replace_string(std::string &str_temp, std::string str_to_replace, std::string new_str)
+{
+	
 }
