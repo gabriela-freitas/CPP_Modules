@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:43:07 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/25 23:02:39 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/25 23:05:21 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	main(void)
 	Harl harl;
 
 	harl.complain("debug");
+	harl.complain("error");
 	harl.complain("info");
 	harl.complain("warning");
-	harl.complain("error");
 	harl.complain("errorEWD");
 	return (0);
 }
