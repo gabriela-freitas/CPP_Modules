@@ -4,7 +4,7 @@
 
 MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
-NAME	=	ex05
+NAME	=	harlFilter
 SRC	=	$(wildcard srcs/*.cpp)
 CC = c++
 

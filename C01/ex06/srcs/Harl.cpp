@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 23:01:11 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/25 23:28:54 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/26 13:10:31 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 Harl::Harl()
 {
-	func_names[0] = "debug";
-	func_names[1] = "info";
-	func_names[2] = "warning";
-	func_names[3] = "error";
+	func_names[0] = "DEBUG";
+	func_names[1] = "INFO";
+	func_names[2] = "WARNING";
+	func_names[3] = "ERROR";
 	function[0] = &Harl::debug;
 	function[1] = &Harl::info;
 	function[2] = &Harl::warning;
@@ -56,15 +56,46 @@ void Harl::error(void){
 	std::cout << "This is unacceptable! I want to speak to the manager now.\n" << std::endl;
 }
 
+void Harl::print_level (int i)
+{
+	f_pointer p;
+
+	while (i < 4)
+	{
+		p = this->function[i++];
+		(this->*p)();
+	}
+}
+
 void Harl::complain(std::string start_level)
 {
-	// f_pointer p;
-	// int i;
+	int level;
 
-	// while (i < 4)
-	// {
-	// 	p = this->function[i++];
-	// 	(this->*p)();
-	// }
-	(void) start_level;
+	level = -1;
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->func_names[i] == start_level)
+		{
+			level = i;
+			break ;
+		}
+	}
+	switch (level)
+	{
+		case (0):
+			print_level(0);
+			break;
+		case (1):
+			print_level(1);
+			break;
+		case (2):
+			print_level(2);
+			break;
+		case (3):
+			print_level(3);
+			break;
+		default:
+			std::cout << "[ Probably complaining about insignificant problems ]\n" << std::endl;
+			break;
+	}
 }

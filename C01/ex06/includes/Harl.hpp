@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:36:40 by gafreita          #+#    #+#             */
-/*   Updated: 2022/10/25 23:16:56 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/10/26 13:03:09 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ class Harl {
 		void info( void );
 		void warning( void );
 		void error( void );
+		void print_level(int i);
 };
 #endif
