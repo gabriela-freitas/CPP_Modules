@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 19:29:31 by gafreita          #+#    #+#             */
-/*   Updated: 2022/11/15 21:18:51 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:23:38 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,11 @@ bool	Fixed::operator!= (const Fixed& param){
 /*####### ARITHMETIC OPERATIONS ############*/
 
 //This operations work the same in fixed numbers
-Fixed&	Fixed::operator+ (const Fixed& param){
-	Fixed	res(this->_fixedNum + param._fixedNum);
-	return (&res);
+Fixed	Fixed::operator+ (const Fixed& param){
+	return (Fixed(this->_fixedNum + param._fixedNum));
 }
-Fixed&	Fixed::operator- (const Fixed& param){
-	Fixed res(this->_fixedNum - param._fixedNum);
-	return (&res);
+Fixed	Fixed::operator- (const Fixed& param){
+	return (Fixed(this->_fixedNum - param._fixedNum));
 }
 
 /*In these ones we need first to typecast it to long long int
@@ -111,15 +109,12 @@ in order to deal with overflow and underflow
 		The result will be a 32-bit fixed point variable with the decimal precisely where we want it
 
 */
-Fixed&	Fixed::operator* (const Fixed& param){
-	Fixed res(((signed long long)this->_fixedNum * (signed long long)param._fixedNum) >> this->_fractional_bits);
-
-	return (&res);
+Fixed	Fixed::operator* (const Fixed& param){
+	return (Fixed((float)(((signed long long)this->_fixedNum * (signed long long)param._fixedNum) >> this->_fractional_bits)));
 }
 
-Fixed&	Fixed::operator/ (const Fixed& param){
-	Fixed res(((signed long long)this->_fixedNum << this->_fractional_bits) / (signed long long)param._fixedNum);
-	return (&res);
+Fixed	Fixed::operator/ (const Fixed& param){
+	return (Fixed((float)(((signed long long)this->_fixedNum << this->_fractional_bits) / (signed long long)param._fixedNum)));
 }
 
 // /*########## INCREMENT OPERATORS ###########*/
