@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 19:29:31 by gafreita          #+#    #+#             */
-/*   Updated: 2022/11/18 09:55:31 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:10:59 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,6 @@ in order to deal with overflow and underflow
 
 */
 Fixed	Fixed::operator* (const Fixed& param){
-	// Fixed	result;
-
-	// result.setRawBits(this->getRawBits() * param.getRawBits());
-	// result.setRawBits(result.getRawBits() / (1 << result._fractional_bits));
-	// return (result);
 	return (Fixed(this->toFloat() * param.toFloat()));
 }
 
@@ -128,7 +123,6 @@ Fixed	Fixed::operator/ (const Fixed& param){
 	result.setRawBits(((float)this->getRawBits() / param.getRawBits())
 			* (1 << this->_fractional_bits));
 	return (result);
-	// return (Fixed((int)(((signed long long)this->_fixedNum << this->_fractional_bits) / (signed long long)param._fixedNum)));
 }
 
 /*########## INCREMENT OPERATORS ###########*/
