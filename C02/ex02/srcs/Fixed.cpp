@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 19:29:31 by gafreita          #+#    #+#             */
-/*   Updated: 2022/11/16 20:23:38 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/11/18 09:55:31 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,31 @@
 /*############EX00#################*/
 
 Fixed::Fixed() {
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& param) {
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 	*this = param;
 }
 
 Fixed::Fixed(const int num){
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 	this->_fixedNum = num << this->_fractional_bits;
 }
 
 Fixed::Fixed(const float num){
-	std::cout << "Float constructor called" << std::endl;
-	this->_fixedNum = num * pow(2, this->_fractional_bits);
+	// std::cout << "Float constructor called" << std::endl;
+	this->setRawBits(roundf(num * (1 << this->_fractional_bits)));
 }
 
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 Fixed& Fixed::operator= (const Fixed& param)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixedNum = param.getRawBits();
 	return (*this);
 }
@@ -54,7 +54,7 @@ void Fixed::setRawBits( int const raw ){
 /*############EX01#################*/
 
 float	Fixed::toFloat(void) const{
-	return (this->_fixedNum / pow(2, this->_fractional_bits));
+	return ((float)this->_fixedNum / (float) (1 << this->_fractional_bits));
 }
 
 int		Fixed::toInt(void) const{
@@ -93,10 +93,14 @@ bool	Fixed::operator!= (const Fixed& param){
 
 //This operations work the same in fixed numbers
 Fixed	Fixed::operator+ (const Fixed& param){
-	return (Fixed(this->_fixedNum + param._fixedNum));
+	Fixed res;
+	res.setRawBits(this->_fixedNum + param._fixedNum);
+	return (res);
 }
 Fixed	Fixed::operator- (const Fixed& param){
-	return (Fixed(this->_fixedNum - param._fixedNum));
+	Fixed res;
+	res.setRawBits(this->_fixedNum - param._fixedNum);
+	return (res);
 }
 
 /*In these ones we need first to typecast it to long long int
@@ -110,24 +114,46 @@ in order to deal with overflow and underflow
 
 */
 Fixed	Fixed::operator* (const Fixed& param){
-	return (Fixed((float)(((signed long long)this->_fixedNum * (signed long long)param._fixedNum) >> this->_fractional_bits)));
+	// Fixed	result;
+
+	// result.setRawBits(this->getRawBits() * param.getRawBits());
+	// result.setRawBits(result.getRawBits() / (1 << result._fractional_bits));
+	// return (result);
+	return (Fixed(this->toFloat() * param.toFloat()));
 }
 
 Fixed	Fixed::operator/ (const Fixed& param){
-	return (Fixed((float)(((signed long long)this->_fixedNum << this->_fractional_bits) / (signed long long)param._fixedNum)));
+	Fixed	result;
+
+	result.setRawBits(((float)this->getRawBits() / param.getRawBits())
+			* (1 << this->_fractional_bits));
+	return (result);
+	// return (Fixed((int)(((signed long long)this->_fixedNum << this->_fractional_bits) / (signed long long)param._fixedNum)));
 }
 
-// /*########## INCREMENT OPERATORS ###########*/
-// Fixed&	operator++ (void);
-// Fixed&	operator++ (int param);
+/*########## INCREMENT OPERATORS ###########*/
+//post-increment
+Fixed&	Fixed::operator++(void){
+	*this = Fixed(*this + Fixed(1));
+	return (*this);
+}
+//pre-increment
+Fixed	Fixed::operator++(int){
+	Fixed res(*this);
+	*this = Fixed(*this + Fixed(1));
+	return (res);
+}
 
-// /*########## DECREMENT OPERATORS ###########*/
-// Fixed&	operator-- (void);
-// Fixed&	operator-- (int param);
+/*########## DECREMENT OPERATORS ###########*/
+// post-increment
+Fixed&	Fixed::operator--(void){
+	*this = Fixed(*this - Fixed(1));
+	return (*this);
+}
+//pre-increment
+Fixed	Fixed::operator--(int){
+	Fixed res(*this);
+	*this = Fixed(*this - Fixed(1));
+	return (res);
+}
 
-
-// /*####public overloaded member functions#######*/
-// static Fixed& min(Fixed& a, Fixed& b);
-// static Fixed& min(const Fixed& a, const Fixed& b);
-// static Fixed& max(Fixed& a, Fixed& b);
-// static Fixed& max(const Fixed& a, const Fixed& b);

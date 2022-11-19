@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 21:33:37 by gafreita          #+#    #+#             */
-/*   Updated: 2022/11/16 20:21:09 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/11/18 09:55:45 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,46 @@ class Fixed {
 		Fixed	operator/ (const Fixed& param);
 		Fixed	operator* (const Fixed& param);
 
-		// /*########## INCREMENT OPERATORS ###########*/
-		// Fixed&	operator++ (void);
-		// Fixed&	operator++ (int);
 
-		// /*########## DECREMENT OPERATORS ###########*/
-		// Fixed&	operator-- (void);
-		// Fixed&	operator-- (int);
+		/*########## INCREMENT OPERATORS ###########*/
+		Fixed&	operator++(void);
+		Fixed	operator++(int);
 
-		// /*####public overloaded member functions#######*/
-		// static Fixed& min(Fixed& a, Fixed& b);
-		// static Fixed& min(const Fixed& a, const Fixed& b);
-		// static Fixed& max(Fixed& a, Fixed& b);
-		// static Fixed& max(const Fixed& a, const Fixed& b);
+		/*########## DECREMENT OPERATORS ###########*/
+		Fixed&	operator--(void);
+		Fixed	operator--(int);
+
+		/*####public overloaded member functions#######*/
+		static Fixed& min(Fixed& a, Fixed& b)
+		{
+			if (a < b)
+				return (a);
+			else
+				return (b);
+		}
+
+		static Fixed& min(const Fixed& a, const Fixed& b)
+		{
+			if ((Fixed)a < (Fixed)b)
+				return ((Fixed &)a);
+			else
+				return ((Fixed &)b);
+		}
+
+		static Fixed& max(Fixed& a, Fixed& b)
+		{
+			if (a > b)
+				return (a);
+			else
+				return (b);
+		}
+		static Fixed& max(const Fixed& a, const Fixed& b)
+		{
+			if ((Fixed)a > (Fixed)b)
+				return ((Fixed &)a);
+			else
+				return ((Fixed &)b);
+		}
 
 		int getRawBits( void ) const;
 		void setRawBits( int const raw );
