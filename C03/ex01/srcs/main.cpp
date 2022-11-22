@@ -1,10 +1,11 @@
 
 #include "ex01.hpp"
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int	main(void)
 {
-	ClapTrap a("Alex");
+	ScavTrap a("Alex");
 
 	a.attack("Ju");
 	a.takeDamage(5);

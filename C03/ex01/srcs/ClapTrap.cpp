@@ -6,7 +6,7 @@ ClapTrap::ClapTrap():
 	_energy_points(10),
 	_attack_damage(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "ClapTrap Default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name):
@@ -15,12 +15,12 @@ ClapTrap::ClapTrap(std::string name):
 	_energy_points(10),
 	_attack_damage(0)
 {
-	std::cout << "Name constructor called" << std::endl;
+	std::cout << "ClapTrap Name constructor called" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator= (const ClapTrap& param)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "ClapTrap Copy constructor called" << std::endl;
 	this->_name = param.get_name();
 	return (*this);
 }
@@ -38,7 +38,6 @@ std::string ClapTrap::get_name(void) const
 ClapTrap::~ClapTrap()
 {
 	std::cout << "ClapTrap" << " destroyed" << std::endl;
-	// TODO (destructor)
 }
 
 void ClapTrap::attack(const std::string& target)
@@ -70,3 +69,4 @@ void ClapTrap::beRepaired(unsigned int amount)
 	else
 		std::cout << "ClapTrap " << this->_name << " has no energy points left to be repaired" << std::endl;
 }
+

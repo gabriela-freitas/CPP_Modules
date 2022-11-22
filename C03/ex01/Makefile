@@ -6,13 +6,13 @@ MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
 NAME	=	ex01
 SRC	=	$(wildcard srcs/*.cpp)
-CC = c++
+CXX = c++
 
 INC = -I ./includes
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-RM = rm -f
+RM ?= rm -f
 
 COLOUR_GREEN=\033[1;32m
 COLOUR_YELLOW=\033[1;33m
@@ -20,13 +20,13 @@ COLOUR_GREY=\033[1;30m
 COLOUR_END=\033[0m
 
 $(NAME): $(OBJS)
-		@ $(CC) $(FLAGS) $(INC) $(SRC) $(LIB) -o $(NAME)
+		@ $(CXX) $(CXXFLAGS) $(INC) $(SRC) $(LIB) -o $(NAME)
 		@echo "$(COLOUR_GREEN) >> $(NAME) is ready to use $(COLOUR_END)"
 
 all : $(NAME)
 
 clean:
-		@ $(RM) $(NAME)
+		$(RM) $(NAME)
 		@echo "$(COLOUR_YELLOW) >> $(NAME) cleaned $(COLOUR_END)"
 
 exe: clean all

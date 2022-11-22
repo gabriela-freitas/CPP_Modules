@@ -4,8 +4,10 @@
 #include <iostream>
 #include <string>
 
+//had to change private to protected, so these attributes could be accessible
+//by the ScavTrap
 class ClapTrap {
-	private:
+	protected:
 		std::string	_name;
 		int	_hit_points;
 		int	_energy_points;
