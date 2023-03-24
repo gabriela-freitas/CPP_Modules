@@ -1,24 +1,25 @@
 
 #include "Cat.hpp"
-Cat::Cat() {
-	// TODO (default constructor)
+
+Cat::Cat(){
+	this->type = "Cat";
+	std::cout << "Cat default constructor called" << std::endl;
 }
+
 Cat::Cat(const Cat& param) {
-	// TODO (copy constructor)
-	(void)param;
+	*this = param;
 }
+
 Cat::~Cat() {
 	std::cout << "Cat" << " destroyed" << std::endl;
-	// TODO (destructor)
 }
+
 Cat& Cat::operator= (const Cat& param) {
-	// TODO (Assignment operatior)
-	// std::swap()
-	(void)param;
+	std::cout << "Cat copy constructor called" << std::endl;
+	this->type = param.type;
 	return (*this);
 }
-std::ostream& operator<<(std::ostream& s, const Cat& param) {
-	// s << param.CONST_METHOD()
-	(void)param;
-	return (s);
+
+void	Cat::makeSound(void) const{
+	std::cout << "Miau Miau!" << std::endl;
 }

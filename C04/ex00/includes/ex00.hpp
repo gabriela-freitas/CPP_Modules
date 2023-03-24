@@ -2,6 +2,10 @@
 #ifndef __EX00_HPP__
 # define __EX00_HPP__
 #include <iostream>
+#include "Animal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
+
 /*
 # define BLACK	"\033[0;30m"
 # define RED	"\033[0;31m"

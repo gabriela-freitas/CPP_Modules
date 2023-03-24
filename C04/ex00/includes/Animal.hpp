@@ -8,8 +8,10 @@ class Animal {
 	public:
 		Animal();
 		Animal(const Animal&);
-		~Animal();
-		Animal&	operator= (const Animal&); // const for safety... not super nesessary
+		virtual ~Animal();
+		Animal&	operator= (const Animal&);
+		std::string getType(void) const;
+		virtual void makeSound(void) const;
 };
-std::ostream&	operator<<(std::ostream&, const Animal&);
+
 #endif

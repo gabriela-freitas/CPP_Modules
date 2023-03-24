@@ -1,13 +1,14 @@
-
 #include "Animal.hpp"
 
-Animal::Animal() {
+Animal::Animal():
+	type("Animal")
+{
 	std::cout << "Animal default constructor called" << std::endl;
 }
 
 Animal::Animal(const Animal& param) {
 	// TODO (copy constructor)
-	(void)param;
+	*this = param;
 }
 
 Animal::~Animal() {
@@ -16,14 +17,15 @@ Animal::~Animal() {
 }
 
 Animal& Animal::operator= (const Animal& param) {
-	// TODO (Assignment operatior)
-	// std::swap()
-	(void)param;
+	std::cout << "Animal Copy constructor called" << std::endl;
+	this->type = param.type;
 	return (*this);
 }
 
-std::ostream& operator<<(std::ostream& s, const Animal& param) {
-	// s << param.CONST_METHOD()
-	(void)param;
-	return (s);
+std::string Animal::getType(void) const{
+	return (this->type);
+}
+
+void Animal::makeSound(void) const{
+	std::cout << "*** just regular breathing sounds ***" << std::endl;
 }
