@@ -3,19 +3,14 @@
 
 int	main(void)
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+	Animal *creche_dos_bichinhos[10];
 
-
-
-	delete meta;
-	delete i;
-	delete j;
-	return (0);
+	for (int i = 0; i < 10; i++)
+	{
+		if (i < 5)
+			creche_dos_bichinhos[i] = new Dog();
+		else
+			creche_dos_bichinhos[i] = new Cat();
+	}
+	delete creche_dos_bichinhos;
 }

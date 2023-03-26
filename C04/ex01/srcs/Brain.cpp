@@ -1,24 +1,22 @@
 
 #include "Brain.hpp"
+#include "ex01.hpp"
+
 Brain::Brain() {
-	// TODO (default constructor)
+	std::cout << "Brain default constructor called" << std::endl;
 }
+
 Brain::Brain(const Brain& param) {
-	// TODO (copy constructor)
-	(void)param;
+	*this = param;
 }
+
 Brain::~Brain() {
 	std::cout << "Brain" << " destroyed" << std::endl;
-	// TODO (destructor)
 }
+
 Brain& Brain::operator= (const Brain& param) {
-	// TODO (Assignment operatior)
-	// std::swap()
-	(void)param;
+	for (int i = 0; i < 100; i++)
+		this->ideas[i] = param.ideas[i];
 	return (*this);
 }
-std::ostream& operator<<(std::ostream& s, const Brain& param) {
-	// s << param.CONST_METHOD()
-	(void)param;
-	return (s);
-}
+

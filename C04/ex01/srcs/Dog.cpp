@@ -1,5 +1,6 @@
 
 #include "Dog.hpp"
+#include "ex01.hpp"
 
 Dog::Dog(){
 	this->type = "Dog";
@@ -11,10 +12,13 @@ Dog::Dog(const Dog& param) {
 }
 
 Dog::~Dog() {
+	delete this->brain;
 	std::cout << "Dog" << " destroyed" << std::endl;
 }
 
 Dog& Dog::operator= (const Dog& param) {
+	this->brain = new Brain;
+	this->brain = param.brain;
 	this->type = param.type;
 	return (*this);
 }

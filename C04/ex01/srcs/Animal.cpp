@@ -1,4 +1,5 @@
 #include "Animal.hpp"
+#include "ex01.hpp"
 
 Animal::Animal():
 	type("Animal")
@@ -19,7 +20,7 @@ Animal::~Animal() {
 Animal& Animal::operator= (const Animal& param) {
 	std::cout << "Animal Copy constructor called" << std::endl;
 	this->brain = new Brain;
-	this->brain = param.brain; //TODO: copy constructor brain
+	this->brain = param.brain;
 	this->type = param.type;
 	return (*this);
 }
