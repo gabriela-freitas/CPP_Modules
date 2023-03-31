@@ -18,6 +18,8 @@ class Animal {
 		Animal&	operator= (const Animal&);
 		std::string getType(void) const;
 		virtual void makeSound(void) const;
+		void	think(std::string idea);
+		void	readMyMind(void);
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include "Dog.hpp"
 #include "ex01.hpp"
 
-Dog::Dog(){
+Dog::Dog() {
 	this->type = "Dog";
 	std::cout << "Dog default constructor called" <<std::endl;
 }

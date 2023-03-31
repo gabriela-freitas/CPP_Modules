@@ -32,3 +32,13 @@ std::string Animal::getType(void) const{
 void Animal::makeSound(void) const{
 	std::cout << "*** just regular breathing sounds ***" << std::endl;
 }
+
+void	Animal::think(std::string idea)
+{
+	this->brain->think(idea);
+}
+
+void	Animal::readMyMind(void)
+{
+	this->brain->readMyMind();
+}

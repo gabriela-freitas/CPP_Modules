@@ -14,7 +14,15 @@ int	main(void)
 			creche_dos_bichinhos[i] = new Cat();
 	}
 
-	creche_dos_bichinhos[0]->getType();
+	std::cout << std::endl;
+
+	creche_dos_bichinhos[0]->think("This is my first idea");
+	creche_dos_bichinhos[0]->think("This is my second idea");
+	creche_dos_bichinhos[0]->readMyMind();
+	creche_dos_bichinhos[0]->think("This is my third idea");
+	creche_dos_bichinhos[0]->readMyMind();
+
+	std::cout << std::endl;
 
 	for (int i = 0; i < N; i++)
 		delete creche_dos_bichinhos[i];
