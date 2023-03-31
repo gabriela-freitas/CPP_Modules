@@ -2,8 +2,7 @@
 #ifndef __CAT_HPP__
 # define __CAT_HPP__
 #include <iostream>
-#include "ex01.hpp"
-
+#include "Animal.hpp"
 
 class Cat: public Animal{
 	private:

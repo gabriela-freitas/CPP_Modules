@@ -2,7 +2,6 @@
 #ifndef __BRAIN_HPP__
 # define __BRAIN_HPP__
 #include <iostream>
-#include "ex01.hpp"
 
 class Brain {
 	private:

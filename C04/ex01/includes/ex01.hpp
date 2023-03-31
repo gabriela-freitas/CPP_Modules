@@ -2,10 +2,10 @@
 #ifndef __EX01_HPP__
 # define __EX01_HPP__
 #include <iostream>
+#include "Brain.hpp"
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "Brain.hpp"
 /*
 # define BLACK	"\033[0;30m"
 # define RED	"\033[0;31m"

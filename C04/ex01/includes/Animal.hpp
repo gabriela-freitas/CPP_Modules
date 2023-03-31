@@ -2,7 +2,7 @@
 #ifndef __ANIMAL_HPP__
 # define __ANIMAL_HPP__
 #include <iostream>
-#include "ex01.hpp"
+#include "Brain.hpp"
 
 class Animal {
 	protected:
