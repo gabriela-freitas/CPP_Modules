@@ -13,6 +13,12 @@ class Dog: public Animal{
 		~Dog();
 		Dog&	operator= (const Dog&);
 		void	makeSound(void) const;
+		void	think (std::string idea){
+			this->brain->think(idea);
+		};
+		void	readMyMind(void){
+			this->brain->readMyMind();
+		};
 };
 
 #endif

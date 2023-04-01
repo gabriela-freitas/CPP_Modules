@@ -5,24 +5,14 @@
 
 class Brain {
 	private:
-		std::string ideas[100];
+		std::string _ideas[100];
+		int		_n_ideas;
 	public:
 		Brain();
 		Brain(const Brain&);
 		~Brain();
 		Brain&	operator= (const Brain&); // const for safety... not super nesessary
-		void	think (std::string idea){
-			static int i = -1;
-
-			this->ideas[++i] = idea;
-		};
-		void	readMyMind(void)
-		{
-			for(int i = 0; !this->ideas[i].empty(); i ++)
-			{
-				std::cout << i << ": ";
-				std::cout << this->ideas[i] << std::endl;
-			}
-		};
+		void	think (std::string idea);
+		void	readMyMind(void);
 };
 #endif

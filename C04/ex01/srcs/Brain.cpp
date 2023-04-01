@@ -2,11 +2,17 @@
 #include "Brain.hpp"
 #include "ex01.hpp"
 
-Brain::Brain() {
+Brain::Brain():
+	_n_ideas(-1) {
+	while (this->_n_ideas < 100 && !this->_ideas[this->_n_ideas++].empty())
+		;
 	std::cout << "Brain default constructor called" << std::endl;
 }
 
-Brain::Brain(const Brain& param) {
+Brain::Brain(const Brain& param):
+	_n_ideas(-1) {
+	while (this->_n_ideas < 100 && !this->_ideas[this->_n_ideas++].empty())
+		;
 	*this = param;
 }
 
@@ -16,7 +22,20 @@ Brain::~Brain() {
 
 Brain& Brain::operator= (const Brain& param) {
 	for (int i = 0; i < 100; i++)
-		this->ideas[i] = param.ideas[i];
+		this->_ideas[i] = param._ideas[i];
 	return (*this);
+}
+
+void	Brain::think (std::string idea){
+	this->_ideas[this->_n_ideas++] = idea;
+}
+
+void	Brain::readMyMind(void)
+{
+	for(int i = 0; !this->_ideas[i].empty(); i ++)
+	{
+		std::cout << i << ": ";
+		std::cout << this->_ideas[i] << std::endl;
+	}
 }
 

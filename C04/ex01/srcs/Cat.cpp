@@ -4,11 +4,12 @@
 
 Cat::Cat(){
 	this->type = "Cat";
-	this->brain = new Brain();
+	this->brain = new Brain;
 	std::cout << "Cat default constructor called" << std::endl;
 }
 
 Cat::Cat(const Cat& param) {
+	std::cout << "Cat copy constructor called" << std::endl;
 	*this = param;
 }
 
@@ -18,9 +19,8 @@ Cat::~Cat() {
 }
 
 Cat& Cat::operator= (const Cat& param) {
-	std::cout << "Cat copy constructor called" << std::endl;
 	this->brain = new Brain;
-	this->brain = param.brain;
+	*(this->brain) = *(param.brain);
 	this->type = param.type;
 	return (*this);
 }

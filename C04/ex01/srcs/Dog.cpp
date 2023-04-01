@@ -4,10 +4,13 @@
 
 Dog::Dog() {
 	this->type = "Dog";
+	this->brain = new Brain;
 	std::cout << "Dog default constructor called" <<std::endl;
 }
 
 Dog::Dog(const Dog& param) {
+	this->brain = new Brain;
+	std::cout << "Dog copy constructor called" <<std::endl;
 	*this = param;
 }
 
@@ -17,8 +20,9 @@ Dog::~Dog() {
 }
 
 Dog& Dog::operator= (const Dog& param) {
-	this->brain = new Brain;
-	this->brain = param.brain;
+	// if (this->brain)
+	// 	delete this->brain;
+	*(this->brain) = *(param.brain);
 	this->type = param.type;
 	return (*this);
 }

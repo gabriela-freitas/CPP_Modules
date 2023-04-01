@@ -4,7 +4,6 @@
 Animal::Animal():
 	type("Animal")
 {
-	this->brain = new Brain();
 	std::cout << "Animal default constructor called" << std::endl;
 }
 
@@ -13,14 +12,11 @@ Animal::Animal(const Animal& param) {
 }
 
 Animal::~Animal() {
-	delete this->brain;
 	std::cout << "Animal" << " destroyed" << std::endl;
 }
 
 Animal& Animal::operator= (const Animal& param) {
 	std::cout << "Animal Copy constructor called" << std::endl;
-	this->brain = new Brain;
-	this->brain = param.brain;
 	this->type = param.type;
 	return (*this);
 }
@@ -33,12 +29,4 @@ void Animal::makeSound(void) const{
 	std::cout << "*** just regular breathing sounds ***" << std::endl;
 }
 
-void	Animal::think(std::string idea)
-{
-	this->brain->think(idea);
-}
 
-void	Animal::readMyMind(void)
-{
-	this->brain->readMyMind();
-}

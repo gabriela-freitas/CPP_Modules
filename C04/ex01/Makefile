@@ -10,7 +10,7 @@ CC = c++
 
 INC = -I ./includes
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 
 RM = rm -f
 
