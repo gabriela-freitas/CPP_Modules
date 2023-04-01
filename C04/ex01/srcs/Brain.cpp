@@ -21,8 +21,9 @@ Brain::~Brain() {
 }
 
 Brain& Brain::operator= (const Brain& param) {
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 100 && !param._ideas[i].empty(); i++)
 		this->_ideas[i] = param._ideas[i];
+	this->_n_ideas = param._n_ideas;
 	return (*this);
 }
 
