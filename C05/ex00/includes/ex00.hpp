@@ -2,6 +2,7 @@
 #ifndef __EX00_HPP__
 # define __EX00_HPP__
 #include <iostream>
+#include "Bureaucrat.hpp"
 /*
 # define BLACK	"\033[0;30m"
 # define RED	"\033[0;31m"

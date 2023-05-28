@@ -4,11 +4,29 @@
 #include <iostream>
 
 class Bureaucrat {
+
 	private:
 		const std::string _name;
 		int _grade;
 
 	public:
+		class myException
+		{
+			public:
+				virtual void message() const;
+		};
+
+		class GradeTooHighException: public myException
+		{
+			public:
+				void message() const;
+		};
+
+		class GradeTooLowException: public myException
+		{
+			public:
+				void message() const;
+		};
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat(const Bureaucrat&);
 		~Bureaucrat();
