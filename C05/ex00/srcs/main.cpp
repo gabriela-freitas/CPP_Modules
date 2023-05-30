@@ -1,5 +1,7 @@
 
 #include "ex00.hpp"
+#include "Bureaucrat.hpp"
+
 int	main(void)
 {
 	Bureaucrat b("João", 151);

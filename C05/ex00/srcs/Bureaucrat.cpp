@@ -81,7 +81,7 @@ void Bureaucrat::decrementGrade(int amount)
 			throw(Bureaucrat::GradeTooHighException());
 		
 	}
-	catch (const Bureaucrat::myException &e)
+	catch (Bureaucrat::myException &e)
 	{
 		e.message();
 	}
@@ -97,4 +97,10 @@ void Bureaucrat::GradeTooHighException::message() const
 void Bureaucrat::GradeTooLowException::message() const
 { 
 	std::cout << "This grade is too low, try within the range 1 - 150" << std::endl;
+}
+
+
+void Bureaucrat::myException::message() const
+{ 
+	std::cout << "message" << std::endl;
 }

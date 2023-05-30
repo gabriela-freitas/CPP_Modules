@@ -13,7 +13,7 @@ class Bureaucrat {
 		class myException
 		{
 			public:
-				virtual void message() const;
+				void message() const;
 		};
 
 		class GradeTooHighException: public myException
@@ -27,6 +27,7 @@ class Bureaucrat {
 			public:
 				void message() const;
 		};
+
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat(const Bureaucrat&);
 		~Bureaucrat();
