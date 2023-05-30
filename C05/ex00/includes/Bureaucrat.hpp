@@ -13,7 +13,10 @@ class Bureaucrat {
 		class myException
 		{
 			public:
-				void message() const;
+				virtual void message() const {
+						std::cout << "Exception: myException" << std::endl;
+				}
+				virtual ~myException() {}
 		};
 
 		class GradeTooHighException: public myException

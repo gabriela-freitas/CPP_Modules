@@ -3,7 +3,7 @@
 
 Bureaucrat::Bureaucrat(std::string name, int grade):
 	_name(name),
-	_grade(grade) 
+	_grade(grade)
 {
 	try
 	{
@@ -11,7 +11,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade):
 			throw(Bureaucrat::GradeTooLowException());
 		if (this->_grade < 1)
 			throw(Bureaucrat::GradeTooHighException());
-		
+
 	}
 	catch (Bureaucrat::myException &e)
 	{
@@ -22,7 +22,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade):
 
 Bureaucrat::Bureaucrat(const Bureaucrat& param):
 	_name(param.getName()),
-	_grade(param.getGrade()) 
+	_grade(param.getGrade())
 {
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
 }
@@ -62,7 +62,7 @@ void Bureaucrat::incrementGrade(int amount)
 			throw(Bureaucrat::GradeTooLowException());
 		if (this->_grade < 1)
 			throw(Bureaucrat::GradeTooHighException());
-		
+
 	}
 	catch (Bureaucrat::myException &e)
 	{
@@ -79,7 +79,7 @@ void Bureaucrat::decrementGrade(int amount)
 			throw(Bureaucrat::GradeTooLowException());
 		if (this->_grade < 1)
 			throw(Bureaucrat::GradeTooHighException());
-		
+
 	}
 	catch (Bureaucrat::myException &e)
 	{
@@ -89,18 +89,13 @@ void Bureaucrat::decrementGrade(int amount)
 }
 
 void Bureaucrat::GradeTooHighException::message() const
-{ 
+{
 	std::cout << "This grade is too high, try within the range 1 - 150" << std::endl;
 }
 
 
 void Bureaucrat::GradeTooLowException::message() const
-{ 
+{
 	std::cout << "This grade is too low, try within the range 1 - 150" << std::endl;
 }
 
-
-void Bureaucrat::myException::message() const
-{ 
-	std::cout << "message" << std::endl;
-}
