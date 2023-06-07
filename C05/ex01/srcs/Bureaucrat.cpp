@@ -2,6 +2,12 @@
 #include "Bureaucrat.hpp"
 #include "ex01.hpp"
 
+Bureaucrat::Bureaucrat():
+	_name("Default"),
+{
+	std::cout << "Bureaucrat default constructor called" << std::endl;
+}
+
 Bureaucrat::Bureaucrat(std::string name, int grade):
 	_name(name),
 	_grade(grade)
