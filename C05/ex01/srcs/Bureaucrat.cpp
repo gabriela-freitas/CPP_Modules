@@ -25,7 +25,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade):
 		e.message();
 		throw (Bureaucrat::myException());
 	}
-	std::cout << "Bureaucrat default constructor called" << std::endl;
+	std::cout << "Bureaucrat " << name << " created" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& param):
