@@ -31,6 +31,7 @@ class Bureaucrat {
 				void message() const;
 		};
 
+		Bureaucrat();
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat(const Bureaucrat&);
 		~Bureaucrat();
