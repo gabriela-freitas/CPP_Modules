@@ -3,7 +3,7 @@
 #include "ex01.hpp"
 
 Bureaucrat::Bureaucrat():
-	_name("Default"),
+	_name("Default")
 {
 	std::cout << "Bureaucrat default constructor called" << std::endl;
 }
@@ -109,3 +109,23 @@ void Bureaucrat::GradeTooLowException::message() const
 	std::cout << RED << "This grade is too low, try within the range 1 - 150" << ENDC << std::endl;
 }
 
+//add a signForm() member function to the Bureaucrat. If the form got signed, it will print something like:
+//   <bureaucrat> signed <form>
+//Otherwise, it will print something like:
+//<bureaucrat> couldn’t sign <form> because <reason>.
+bool Bureaucrat::signForm(const Form &form) const
+{
+	if (!form.getIsSigned())
+	{
+		std::cout << this->_name << " couldn’t sign " << form.getName();
+		std::cout << ", because it's already signed " << std::endl;
+		return (false);
+	}
+	if (this->_grade <= form.getGradeSign())
+	{
+		std::cout << this->_name << " signed form " << form.getName() << std::endl;
+		return (true);
+	}
+	else
+		throw (Form::GradeTooLowException());
+}

@@ -19,7 +19,8 @@ void Form::GradeTooLowException::message() const
 Form::Form():
 	_name("Default"),
 	_gradeExecute(150),
-	_gradeSign(150) 
+	_gradeSign(150),
+	_isSigned(false)
 {
 	std::cout << "Form default constructor called" << std::endl;
 }
@@ -27,7 +28,8 @@ Form::Form():
 Form::Form(const std::string name, const int gradeExecute, const int gradeSign):
 	_name(name),
 	_gradeExecute(gradeExecute),
-	_gradeSign(gradeSign)  
+	_gradeSign(gradeSign),
+	_isSigned(false)
 {
 	try
 	{
@@ -96,7 +98,7 @@ bool Form::getIsSigned() const
 }
 
 
-//TODO:Add also a beSigned() member function to the Form that takes a Bureaucrat as parameter. 
+//Add also a beSigned() member function to the Form that takes a Bureaucrat as parameter. 
 //It changes the form status to signed if the bureaucrat’s grade is high enough 
 //(higher or egal to the required one). Remember, grade 1 is higher than grade 2.
 //If the grade is too low, throw a Form::GradeTooLowException.
@@ -105,23 +107,13 @@ void Form::beSigned(const Bureaucrat &b)
 {
 	try
 	{
-		if (b.getGrade() <= this->getGradeSign())
-		{
+		if (b.signForm(*this))
 			this->_isSigned = true;
-			b.signForm(this);
-		}
-		else
-			throw (Form::GradeTooLowException());
 	}
 	catch (Form::myException &e)
 	{
-		b.signForm(this);
 		e.message();
 	}
 }
 
 
-//TODO:add a signForm() member function to the Bureaucrat. If the form got signed, it will print something like:
-//   <bureaucrat> signed <form>
-//Otherwise, it will print something like:
-//<bureaucrat> couldn’t sign <form> because <reason>.
