@@ -1,15 +1,20 @@
 
 #include "ex00.hpp"
-#include "Bureaucrat.hpp"
-
-int	main(void)
+int	main(int ac, char **av)
 {
-	Bureaucrat b("João", 151);
-	Bureaucrat a("Mario", 143);
+	try
+	{
+		int grade;
+		if (ac > 1)
+			grade = atoi(av[1]);
+		else
+			grade = 120;
+		Bureaucrat b("João", grade);
 
-	std::cout << b << std::endl;
-	std::cout << a << std::endl;
-
-	a.incrementGrade(10);
-	std::cout << a << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	return (0);
 }
