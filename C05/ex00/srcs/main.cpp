@@ -10,6 +10,7 @@ int	main(int ac, char **av)
 		else
 			grade = 120;
 		Bureaucrat b("João", grade);
+		std::cout << b;
 
 	}
 	catch(const std::exception& e)

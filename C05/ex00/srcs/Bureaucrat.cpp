@@ -29,8 +29,7 @@ Bureaucrat& Bureaucrat::operator= (const Bureaucrat& param) {
 }
 
 std::ostream& operator<<(std::ostream& s, const Bureaucrat& param) {
-	// s << param.CONST_METHOD()
-	(void)param;
+	std::cout << param.getName() + ", bureaucrat grade " << param.getGrade() << std::endl;
 	return (s);
 }
 
