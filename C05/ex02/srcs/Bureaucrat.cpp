@@ -84,7 +84,7 @@ bool Bureaucrat::signAForm(AForm& f)
 	return (false);
 }
 
-// TODO: Lastly, add the executeForm(Form const & form) member function to the Bureau- crat. It must attempt to execute the form. If it’s successful, print something like:
+// Lastly, add the executeForm(Form const & form) member function to the Bureau- crat. It must attempt to execute the form. If it’s successful, print something like:
 //    <bureaucrat> executed <form>
 // If not, print an explicit error message.
 // Implement and turn in some tests to ensure everything works as expected.
