@@ -4,41 +4,25 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int	main(int ac, char **av)
 {
-	try
-	{
-		int grade;
-		if (ac > 1)
-			grade = atoi(av[1]);
-		else
-			grade = 120;
-		Bureaucrat b("João", grade);
-		ShrubberyCreationForm s("Boring");
-		PresidentialPardonForm p("Boring");
-		RobotomyRequestForm r("Boring");
+	Intern bob;
 
-		std::cout << b << s << p << r;
-
-		s.beSigned(b);
-		std::cout << std::endl;
-		p.beSigned(b);
-		std::cout << std::endl;
-		r.beSigned(b);
-		std::cout << std::endl;
-		b.executeForm(s);
-		std::cout << std::endl;
-		b.executeForm(p);
-		std::cout << std::endl;
-		b.executeForm(r);
-		std::cout << std::endl;
-		b.executeForm(r);
-		std::cout << std::endl;
-	}
-	catch(const std::exception& e)
+	if (ac > 1)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << std::endl;
+		bob.makeForm(av[1], "blob");
 	}
+	std::cout << std::endl;
+	bob.makeForm("presidential pardon", "blob");
+	std::cout << std::endl;
+	bob.makeForm("RoBotoMy ReqUesT", "blob");
+	std::cout << std::endl;
+	bob.makeForm("SHRUBBERY CREATION", "blob");
+	std::cout << std::endl;
+	bob.makeForm("whatever", "blob");
+
 	return (0);
 }

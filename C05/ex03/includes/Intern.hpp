@@ -2,10 +2,19 @@
 #ifndef __INTERN_HPP__
 # define __INTERN_HPP__
 #include <iostream>
+#include <string.h>
 
-class Aform;
+class AForm;
+typedef  AForm* (*makeFunction)(std::string);
 
 class Intern {
+	private:
+		static AForm *makePresidentialPardon(std::string target);
+		static AForm *makeRobotomyRequest(std::string target);
+		static AForm *makeShrubberyCreation(std::string target);
+		std::string forms[3];
+		makeFunction formsFunc[3];
+
 	public:
 		Intern();
 		Intern(const Intern&);
