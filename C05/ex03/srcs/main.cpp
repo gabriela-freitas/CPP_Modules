@@ -9,6 +9,7 @@
 int	main(int ac, char **av)
 {
 	Intern bob;
+	AForm *f;
 
 	if (ac > 1)
 	{
@@ -16,13 +17,17 @@ int	main(int ac, char **av)
 		bob.makeForm(av[1], "blob");
 	}
 	std::cout << std::endl;
-	bob.makeForm("presidential pardon", "blob");
+	f = bob.makeForm("presidential pardon", "blob");
+	delete f;
 	std::cout << std::endl;
-	bob.makeForm("RoBotoMy ReqUesT", "blob");
+	f = bob.makeForm("RoBotoMy ReqUesT", "blob");
+	delete f;
 	std::cout << std::endl;
-	bob.makeForm("SHRUBBERY CREATION", "blob");
+	f = bob.makeForm("SHRUBBERY CREATION", "blob");
+	delete f;
 	std::cout << std::endl;
-	bob.makeForm("whatever", "blob");
-
+	f = bob.makeForm("whatever", "blob");
+	delete f;
+	
 	return (0);
 }
