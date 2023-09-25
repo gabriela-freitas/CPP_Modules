@@ -1,10 +1,10 @@
 # Makefile created automatically from script
 
-# C++ ex00 [Mon Sep 25 10:05:03 WEST 2023]
+# C++ ex01 [Mon Sep 25 13:14:37 WEST 2023]
 
 MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
-NAME	=	ex00
+NAME	=	ex01
 SRC	=	$(wildcard srcs/*.cpp)
 CC = c++
 

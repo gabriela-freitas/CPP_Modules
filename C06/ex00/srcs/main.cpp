@@ -1,7 +1,10 @@
 
 #include "ex00.hpp"
-int	main(void)
+#include "ScalarConverter.hpp"
+
+int	main(int ac, char** av)
 {
-	std::cout << "Hello Friend\nPulgamecanica greets you :D\n";
+	if (ac > 1)
+		ScalarConverter::converter(av[1]);
 	return (0);
 }

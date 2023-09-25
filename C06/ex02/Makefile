@@ -1,6 +1,6 @@
 # Makefile created automatically from script
 
-# C++ ex00 [Mon Sep 25 10:05:03 WEST 2023]
+# C++ ex00 [Fri Sep 22 10:38:05 WEST 2023]
 
 MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
