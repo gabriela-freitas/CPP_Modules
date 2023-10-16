@@ -4,7 +4,7 @@
 
 MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
-NAME	=	ex00
+NAME	=	ex02
 SRC	=	$(wildcard srcs/*.cpp)
 CC = c++
 
@@ -19,7 +19,7 @@ COLOUR_YELLOW=\033[1;33m
 COLOUR_GREY=\033[1;30m
 COLOUR_END=\033[0m
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(SRC)
 		@ $(CC) $(FLAGS) $(INC) $(SRC) $(LIB) -o $(NAME)
 		@echo "$(COLOUR_GREEN) >> $(NAME) is ready to use $(COLOUR_END)"
 

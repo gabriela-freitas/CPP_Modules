@@ -1,7 +1,18 @@
 
-#include "ex00.hpp"
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+
 int	main(void)
 {
-	std::cout << "Hello Friend\nPulgamecanica greets you :D\n";
-	return (0);
+	Base *random;
+	Base obj;
+
+	random = obj.generate();
+	obj.identify(random);
+	obj.identify(*random);
+
+	A a;
+	obj.identify(a);
 }
