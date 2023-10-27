@@ -1,10 +1,10 @@
 # Makefile created automatically from script
 
-# C++ ex01 [Mon Sep 25 13:14:37 WEST 2023]
+# C++ ex00 [Mon Oct 16 20:09:16 WEST 2023]
 
 MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
-NAME	=	ex01
+NAME	=	ex00
 SRC	=	$(wildcard srcs/*.cpp)
 CC = c++
 
@@ -19,7 +19,7 @@ COLOUR_YELLOW=\033[1;33m
 COLOUR_GREY=\033[1;30m
 COLOUR_END=\033[0m
 
-$(NAME): $(SRC) $(OBJS)
+$(NAME): $(OBJS)
 		@ $(CC) $(FLAGS) $(INC) $(SRC) $(LIB) -o $(NAME)
 		@echo "$(COLOUR_GREEN) >> $(NAME) is ready to use $(COLOUR_END)"
 
