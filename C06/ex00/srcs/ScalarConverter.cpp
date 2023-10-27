@@ -44,7 +44,6 @@ void ScalarConverter::converter(std::string literal)
 	{
 		double d = atof(literal.c_str());
 		char c = static_cast<char>(d);
-		std::cout << *p << std::endl;
 		std::cout << "char: ";
 		if (in_limits<char>(d) && !std::isnan(d))
 			std::cout << (std::isprint(c) ? ("'" + std::string(1, c) + "'") : "Non printable") << std::endl;
