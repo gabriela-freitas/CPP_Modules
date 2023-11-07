@@ -31,6 +31,14 @@ static bool in_limits(double c)
 	return true;
 }
 
+//TODO: get type function
+// You have to first detect the type of the literal passed as parameter, convert it from
+// string to its actual type, then convert it explicitly to the three other data types. Lastly,
+// display the results as shown below.
+// If a conversion does not make any sense or overflows, display a message to inform
+// the user that the type conversion is impossible. Include any header you need in order to
+// handle numeric limits and special values
+
 void ScalarConverter::converter(std::string literal)
 {
 	if (literal.size() == 1 && !std::isdigit(literal[0]))
