@@ -15,8 +15,8 @@ class Bureaucrat {
 		Bureaucrat&	operator= (const Bureaucrat&); // const for safety... not super nesessary
 		std::string getName() const;
 		int 	getGrade() const;
-		void	incrementGrade(int grade);
-		void	decrementGrade(int grade);
+		void	incrementGrade();
+		void	decrementGrade();
 		// Excepion classes
 		class GradeTooHighException : public std::exception {
 		public:

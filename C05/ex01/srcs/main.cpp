@@ -1,5 +1,6 @@
 
 #include "ex01.hpp"
+#include <stdlib.h>
 
 int	main(int ac, char **av)
 {

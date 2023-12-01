@@ -1,5 +1,7 @@
 
 #include "ex00.hpp"
+#include <stdlib.h>
+
 int	main(int ac, char **av)
 {
 	try
@@ -11,7 +13,10 @@ int	main(int ac, char **av)
 			grade = 120;
 		Bureaucrat b("João", grade);
 		std::cout << b;
-
+		b.incrementGrade();
+		std::cout << b;
+		b.decrementGrade();
+		std::cout << b;
 	}
 	catch(const std::exception& e)
 	{
