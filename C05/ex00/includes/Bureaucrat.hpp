@@ -2,6 +2,7 @@
 #ifndef __BUREAUCRAT_HPP__
 # define __BUREAUCRAT_HPP__
 #include <iostream>
+
 class Bureaucrat {
 	private:
 		const std::string _name;

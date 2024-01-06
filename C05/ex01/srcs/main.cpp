@@ -12,7 +12,7 @@ int	main(int ac, char **av)
 		else
 			grade = 120;
 		Bureaucrat b("João", grade);
-		Form f("Boring", 50, 50);
+		Form f("Boring", 151, 50);
 		std::cout << b << f;
 		f.beSigned(b);
 	}
