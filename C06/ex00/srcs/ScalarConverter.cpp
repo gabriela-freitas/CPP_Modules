@@ -6,6 +6,7 @@
 #include <cmath>
 #include <sstream>
 #include <algorithm>
+#include <iomanip>
 
 ScalarConverter::ScalarConverter() {
 	std::cout << "Default constructor called" << std::endl;
@@ -52,107 +53,142 @@ enum e_type
 
 e_type identifyType(std::string literal)
 {
-	int intValue;
-	float floatValue;
-	std::stringstream ss;
-
 	if (literal.size() == 1 && !std::isdigit(literal[0]))
 		return CHAR;
 	if ((std::count(literal.begin(), literal.end(), '-')
-			+ std::count(literal.begin(), literal.end(), '+')) > 1)
+			+ std::count(literal.begin(), literal.end(), '+')
+			+ std::count(literal.begin() + 1, literal.end(), '+')
+			+ std::count(literal.begin() + 1, literal.end(), '-')) > 1)
 		return INVALID;
 	if (std::count(literal.begin(), literal.end(), '.') > 1
 		|| *literal.begin() == '.'
-		|| *literal.end() == '.')
+		|| *literal.rbegin() == '.')
 		return INVALID;
 
-	ss << literal;
-	ss >> intValue;
-	ss >> floatValue;
+	if (!literal.compare("-inf") || !literal.compare("+inf") || !literal.compare("nan") || !literal.compare("inf") )
+		return DOUBLE;
+	if (!literal.compare("-inff") || !literal.compare("+inff") || !literal.compare("inff"))
+		return FLOAT;
+	if (std::count(literal.begin(), literal.end(), 'f') > 1 || std::count(literal.begin(), literal.end(), '.') > 1)
+		return INVALID;
 
-	if (intValue == 0)
-	{
-		if (!literal.compare("0"))
-			return INT;
-		if (!literal.compare("0.0") || !literal.compare("-inf") || !literal.compare("+inf") || !literal.compare("nan"))
-			return DOUBLE;
-		if (!literal.compare("0.0F") || !literal.compare("-inff") || !literal.compare("+inff"))
-			return FLOAT;
-	}
 	for (std::string::iterator it = literal.begin(); it != literal.end(); it++)
 	{
-		if (it != literal.begin() && isalpha(*it))
-			return INVALID;
-		else if (isalpha(*it) && (*it == '-' || *it == '+' || *it == '.' || *it == 'f'))
+		if (*it == '-' || *it == '+' || *it == '.' || *it == 'f')
 			continue;
+		if (isalpha(*it))
+			return INVALID;
 	}
 
-	//FIXME:
-	if (std::count(literal.begin(), literal.end(), 'f') == 1 && *literal.end() == 'f')
-		return FLOAT;
 	if (std::count(literal.begin(), literal.end(), '.') == 1
-		|| *literal.begin() != '.'
-		|| *literal.end() != '.')
-		return DOUBLE;
+		&& *literal.begin() != '.'
+		&& *literal.rbegin() != '.')
+	{
+		if (std::count(literal.begin(), literal.end(), 'f') == 1 && *literal.rbegin() == 'f')
+			return FLOAT;
+		else
+			return DOUBLE;
+	}
 	return INT;
-
 }
 
 
+void print(char c)
+{
+	std::cout << "char: ";
+	if (in_limits<char>(c) && !std::isnan(c))
+		std::cout << (std::isprint(c) ? ("'" + std::string(1, c) + "'") : "Non printable") << std::endl;
+	else
+		std::cout << "impossible" << std::endl;
+}
+
+void print(int num)
+{
+	std::cout << "int: ";
+	if (in_limits<int>(num)&& !std::isnan(num))
+		std::cout << num << std::endl;
+	else
+		std::cout << "impossible" << std::endl;
+}
+
+void print(float num)
+{
+	std::cout << "float: " << std::fixed << std::setprecision(3) << num << "f" << std::endl;
+}
+
+void print(double num)
+{
+	std::cout << "double: " << std::fixed << std::setprecision(3) << num << std::endl;
+}
+
+
+void printNumber(int num)
+{
+	print(static_cast<char>(num));
+	print(num);
+	print(static_cast<float>(num));
+	print(static_cast<double>(num));
+}
+
+void printNumber(char num)
+{
+	print(num);
+	print(static_cast<int>(num));
+	print(static_cast<float>(num));
+	print(static_cast<double>(num));
+}
+
+void printNumber(float num)
+{
+	print(static_cast<char>(num));
+	print(static_cast<int>(num));
+	print(num);
+	print(static_cast<double>(num));
+}
+
+void printNumber(double num)
+{
+	print(static_cast<char>(num));
+	print(static_cast<int>(num));
+	print(static_cast<float>(num));
+	print(num);
+}
+
+//TODO: IM NOT DEALING WITH THE IMPOSSIBLE CONVERSIONS (TRY WITH NUMBERS ABOVE INT AND CHAR LIMIT)
+
 void ScalarConverter::converter(std::string literal)
 {
-	std::stringstream conv;
+	identifyType(literal);
+	std::stringstream type;
+	std::stringstream conversion;
 
-	conv << "Type is: ";
+	type << "Type is: ";
+	conversion << literal;
 	switch (identifyType(literal))
 	{
 		case INT:
-			conv << "int";
+			type << "int";
+			int num;
+			conversion >> num;
+			printNumber(num);
 			break;
 		case FLOAT:
-			conv << "float";
+			printNumber(strtof(literal.c_str(), NULL));
+			type << "float";
 			break;
 		case CHAR:
-			conv << "CHAR";
+			printNumber(literal[0]);
+			type << "CHAR";
 			break;
 		case INVALID:
-			conv << "INVALID";
+			type << "INVALID";
 			break;
 		case DOUBLE:
-			conv << "DOUBLE";
+			printNumber(atof(literal.c_str()));
+			type << "DOUBLE";
 			break;
 		default:
 			break;
 	}
-	std::cout << conv.str() << std::endl;
+	std::cout << type.str() << std::endl;
 }
-
-
-// void ScalarConverter::converter(std::string literal)
-// {
-// 	if (literal.size() == 1 && !std::isdigit(literal[0]))
-// 	{
-// 		std::cout << "char: " << literal[0] << std::endl;
-// 		std::cout << "int: " << static_cast<int>(literal[0]) << std::endl;
-// 		std::cout << "float: " << std::fixed << static_cast<float>(literal[0]) << "f" << std::endl;
-// 		std::cout << "double: " << std::fixed << static_cast<double>(literal[0]) << std::endl;
-// 	}
-// 	else
-// 	{
-// 		double d = atof(literal.c_str());
-// 		char c = static_cast<char>(d);
-// 		std::cout << "char: ";
-// 		if (in_limits<char>(d) && !std::isnan(d))
-// 			std::cout << (std::isprint(c) ? ("'" + std::string(1, c) + "'") : "Non printable") << std::endl;
-// 		else
-// 			std::cout << "impossible" << std::endl;
-
-// 		std::cout << "int: ";
-// 		if (in_limits<int>(d)&& !std::isnan(d))
-// 			std::cout << static_cast<int>(d) << std::endl;
-// 		else
-// 			std::cout << "impossible" << std::endl;
-// 		std::cout << "float: " << std::fixed << static_cast<float>(d) << "f" << std::endl;
-// 		std::cout << "double: " << std::fixed << d << std::endl;
-// 	}
-// }
