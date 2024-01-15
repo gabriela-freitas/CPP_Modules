@@ -1,10 +1,6 @@
-#include "Base.hpp"
-#include "A.hpp"
-#include "B.hpp"
-#include "C.hpp"
-#include <random>
-
-Base::~Base(){};
+#include "identifyFunction.hpp"
+#include <cstdlib>
+#include <ctime>
 
 static Base* genA()
 {
@@ -23,18 +19,18 @@ static Base* genC()
 
 typedef Base* (*genBase)();
 
-Base * Base::generate(void)
+Base * generate(void)
 {
-    std::random_device rd;
-    std::uniform_int_distribution<int> dist(0,2);
+    std::srand(std::time(0));
+    int RandNumber = (std::rand() % 3);
     genBase constructors[3] = {&genA, &genB, &genC};
 
-    int number = dist(rd);
-    return (constructors[number]());
+    return (constructors[RandNumber]());
 }
 
-void Base::identify(Base* p)
+void identify(Base* p)
 {
+	std::cout << "\033[1;30mIdentifying with a Base Pointer \033[0m" << std::endl;
     if (dynamic_cast<A*>(p))
         std::cout << "Type is A" << std::endl;
     else if (dynamic_cast<B*>(p))
@@ -48,30 +44,34 @@ void Base::identify(Base* p)
 // You cannot verify the success of a dynamic cast using reference types by comparing the result
 // (the reference that results from the dynamic cast) with zero because there is no such thing as a zero reference.
 // A failing dynamic cast to a reference type throws a bad_cast exception.
-void Base::identify(Base& p)
+void identify(Base& p)
 {
+	std::cout << "\033[1;30mIdentifying with a Base Reference \033[0m" << std::endl;
     try
     {
         A a = dynamic_cast<A&>(p);
         std::cout << "Type is A" << std::endl;
+        return ;
     }
-    catch (const std::bad_cast& e){
-        try
-        {
-            B b = dynamic_cast<B&>(p);
-            std::cout << "Type is B" << std::endl;
-        }
-        catch(const std::bad_cast& e)
-        {
-            try
-            {
-                C c = dynamic_cast<C&>(p);
-                std::cout << "Type is C" << std::endl;
-            }
-            catch(const std::bad_cast& e)
-            {
-                std::cout << "Cast was not succefull" << std::endl;
-            }
-        }
+    catch (std::exception &e){
+    }
+    try
+    {
+        B b = dynamic_cast<B&>(p);
+        std::cout << "Type is B" << std::endl;
+        return ;
+    }
+    catch(std::exception &e)
+    {
+    }
+    try
+    {
+        C c = dynamic_cast<C&>(p);
+        std::cout << "Type is C" << std::endl;
+        return ;
+    }
+    catch(std::exception &e)
+    {
+        std::cout << "Cast was not succefull: " << e.what() << std::endl;
     }
 }

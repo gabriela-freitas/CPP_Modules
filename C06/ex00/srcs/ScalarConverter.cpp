@@ -92,103 +92,53 @@ e_type identifyType(std::string literal)
 	return INT;
 }
 
-
-void print(char c)
+void print(double num)
 {
 	std::cout << "char: ";
-	if (in_limits<char>(c) && !std::isnan(c))
+	char c = static_cast<char>(num);
+	if (in_limits<char>(num) && !std::isnan(num))
 		std::cout << (std::isprint(c) ? ("'" + std::string(1, c) + "'") : "Non printable") << std::endl;
 	else
 		std::cout << "impossible" << std::endl;
-}
 
-void print(int num)
-{
 	std::cout << "int: ";
 	if (in_limits<int>(num)&& !std::isnan(num))
-		std::cout << num << std::endl;
+		std::cout << static_cast<int>(num) << std::endl;
 	else
 		std::cout << "impossible" << std::endl;
+	std::cout << "float: " << std::fixed << std::setprecision(3) << static_cast<float>(num) << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(3) << static_cast<double>(num) << std::endl;
 }
-
-void print(float num)
-{
-	std::cout << "float: " << std::fixed << std::setprecision(3) << num << "f" << std::endl;
-}
-
-void print(double num)
-{
-	std::cout << "double: " << std::fixed << std::setprecision(3) << num << std::endl;
-}
-
-
-void printNumber(int num)
-{
-	print(static_cast<char>(num));
-	print(num);
-	print(static_cast<float>(num));
-	print(static_cast<double>(num));
-}
-
-void printNumber(char num)
-{
-	print(num);
-	print(static_cast<int>(num));
-	print(static_cast<float>(num));
-	print(static_cast<double>(num));
-}
-
-void printNumber(float num)
-{
-	print(static_cast<char>(num));
-	print(static_cast<int>(num));
-	print(num);
-	print(static_cast<double>(num));
-}
-
-void printNumber(double num)
-{
-	print(static_cast<char>(num));
-	print(static_cast<int>(num));
-	print(static_cast<float>(num));
-	print(num);
-}
-
-//TODO: IM NOT DEALING WITH THE IMPOSSIBLE CONVERSIONS (TRY WITH NUMBERS ABOVE INT AND CHAR LIMIT)
 
 void ScalarConverter::converter(std::string literal)
 {
 	identifyType(literal);
-	std::stringstream type;
-	std::stringstream conversion;
 
-	type << "Type is: ";
-	conversion << literal;
 	switch (identifyType(literal))
 	{
 		case INT:
-			type << "int";
-			int num;
-			conversion >> num;
-			printNumber(num);
+			std::cout << ">> Type is: INT <<" << std::endl;
+			if (!in_limits<int>(atof(literal.c_str())))
+				std::cout << "Integer overflow" << std::endl;
+			else
+				print(atof(literal.c_str()));
 			break;
 		case FLOAT:
-			printNumber(strtof(literal.c_str(), NULL));
-			type << "float";
+			std::cout << ">> Type is: FLOAT <<" << std::endl;
+			print(atof(literal.c_str()));
 			break;
 		case CHAR:
-			printNumber(literal[0]);
-			type << "CHAR";
-			break;
-		case INVALID:
-			type << "INVALID";
+			std::cout << ">> Type is: CHAR <<" << std::endl;
+			print((double)literal[0]);
 			break;
 		case DOUBLE:
-			printNumber(atof(literal.c_str()));
-			type << "DOUBLE";
+			std::cout << ">> Type is: DOUBLE <<" << std::endl;
+			print(atof(literal.c_str()));
+			break;
+		case INVALID:
+			std::cout << "INVALID INPUT" << std::endl;
 			break;
 		default:
 			break;
 	}
-	std::cout << type.str() << std::endl;
 }

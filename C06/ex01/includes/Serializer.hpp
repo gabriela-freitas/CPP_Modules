@@ -6,9 +6,11 @@
 #include <stdint.h>
 
 class Serializer {
-	public:
+	private:
 		Serializer();
 		Serializer(const Serializer&);
+
+	public:
 		~Serializer();
 		Serializer&	operator= (const Serializer&);
 		static uintptr_t serialize(Data* ptr);

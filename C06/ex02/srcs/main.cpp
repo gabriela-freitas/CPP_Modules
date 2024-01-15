@@ -1,18 +1,17 @@
 
-#include "Base.hpp"
-#include "A.hpp"
-#include "B.hpp"
-#include "C.hpp"
+#include "identifyFunction.hpp"
 
 int	main(void)
 {
 	Base *random;
-	Base obj;
 
-	random = obj.generate();
-	obj.identify(random);
-	obj.identify(*random);
+	std::cout << "\033[1;33mGenerating Random A, B or C.... \033[0m" << std::endl;
+	random = generate();
+	identify(random);
+	identify(*random);
 
-	A a;
-	obj.identify(a);
+	std::cout << "\033[1;33mTesting how it would behave with an Invalid Type.... \033[0m" << std::endl;
+	random = NULL;
+	identify(random);
+	identify(*random);
 }

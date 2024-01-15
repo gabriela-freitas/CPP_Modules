@@ -4,16 +4,12 @@
 
 #include <iostream>
 
-class Data {
-	public:
+struct Data {
 		Data();
-		Data(const Data&);
-		~Data();
-		Data&	operator= (const Data&); // const for safety... not super nesessary
-
 		int a;
 		std::string str;
 		float b;
 };
+
 std::ostream&	operator<<(std::ostream&, const Data&);
 #endif
