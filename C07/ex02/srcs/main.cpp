@@ -1,7 +1,9 @@
 #include <iostream>
-#include <Array.hpp>
+#include "Array.hpp"
 
 #define MAX_VAL 750
+
+//TODO: this file was in the subject
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
