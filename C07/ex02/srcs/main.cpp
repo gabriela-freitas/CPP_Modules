@@ -1,55 +1,37 @@
 #include <iostream>
 #include "Array.hpp"
+#include "iter.hpp"
 
-#define MAX_VAL 750
+#define MAX_VAL 40
+
+int returnRand(int i)
+{
+    return std::rand() % MAX_VAL + i;
+}
 
 //TODO: this file was in the subject
 int main(int, char**)
 {
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
-    }
-    //SCOPE
-    {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
+	std::cout << "\033[1;34mTesting in a int array: \033[0m" << std::endl;
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
-        }
-    }
+    Array<int> intArr(std::rand() % MAX_VAL);
+	std::srand(std::time(0));
+    iter(&intArr[0], intArr.size(), &returnRand);
+
+    Array<int> otherArr(intArr);
+    otherArr[intArr.size() % 2] = intArr[intArr.size() % 2] * 2;
+
+	std::cout << "\033[1;34mMaking sure copied Array is independent in index (" << intArr.size() % 2 << "): \033[0m" << std::endl;
+    std::cout << "First Array = " << intArr[intArr.size() % 2] << std::endl;
+    std::cout << "Copied Array = " << otherArr[intArr.size() % 2] << std::endl;
+
+	std::cout << "\033[1;34mMaking sure it throws exception when accessing a range out of bonds: \033[0m" << std::endl;
     try
     {
-        numbers[-2] = 0;
+        intArr[40];
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "\033[0;31m" << e.what() << "\033[0m" << '\n';
     }
-    try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
-    }
-    delete [] mirror;//
-    return 0;
 }
