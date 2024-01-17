@@ -22,5 +22,8 @@ typename T::iterator easyfind(T container, int target)
 {
     typename T::iterator it = std::find(container.begin(), container.end(), target);
 
-    if (it != co)
+    if (it == container.end())
+        throw (std::exception());
+    else
+        return it;
 }
