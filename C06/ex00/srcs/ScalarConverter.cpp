@@ -67,7 +67,7 @@ e_type identifyType(std::string literal)
 
 	if (!literal.compare("-inf") || !literal.compare("+inf") || !literal.compare("nan") || !literal.compare("inf") )
 		return DOUBLE;
-	if (!literal.compare("-inff") || !literal.compare("+inff") || !literal.compare("inff"))
+	if (!literal.compare("-inff") || !literal.compare("+inff") || !literal.compare("inff") || !literal.compare("nanf"))
 		return FLOAT;
 	if (std::count(literal.begin(), literal.end(), 'f') > 1 || std::count(literal.begin(), literal.end(), '.') > 1)
 		return INVALID;
