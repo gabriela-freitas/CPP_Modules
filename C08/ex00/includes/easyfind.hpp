@@ -1,3 +1,7 @@
+#pragma once
+
+#include <algorithm>
+
 //TODO:
 
 // A first easy exercise is the way to start off on the right foot.
@@ -12,3 +16,11 @@
 
 // Of course, implement and turn in your own tests to ensure everything works as ex-
 // pected.
+
+template <typename T>
+typename T::iterator easyfind(T container, int target)
+{
+    typename T::iterator it = std::find(container.begin(), container.end(), target);
+
+    if (it != co)
+}
