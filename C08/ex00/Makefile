@@ -5,10 +5,10 @@
 MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
 NAME	=	ex00
-SRC	=	$(wildcard srcs/*.cpp)
+SRC	=	$(wildcard srcs/*.cpp) ../testingUtils.cpp
 CC = c++
 
-INC = -I ./includes
+INC = -I ./includes -I ../
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
