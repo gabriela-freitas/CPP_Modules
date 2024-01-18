@@ -2,8 +2,6 @@
 
 #include <algorithm>
 
-//TODO:
-
 // A first easy exercise is the way to start off on the right foot.
 // Write a function template easyfind that accepts a type T. It takes two parameters.
 //  - The first one has type T and the second one is an integer.
@@ -23,7 +21,7 @@ typename T::iterator easyfind(T container, int target)
     typename T::iterator it = std::find(container.begin(), container.end(), target);
 
     if (it == container.end())
-        throw (std::exception());
+        throw(std::exception());
     else
         return it;
 }
