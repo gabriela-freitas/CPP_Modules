@@ -3,6 +3,7 @@
 #define __SPAN_HPP__
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 // Develop a Span class that can store a maximum of N integers. N is an unsigned int
 //  variable and will be the only parameter passed to the constructor.
