@@ -5,13 +5,13 @@ all : ex00 ex01 ex02
 ex00:
 	@make -C ./ex00
 	@echo "\033[0;32m>>>>>>>>> Running btc\033[0m"
-	@./ex00/ex00
+	@./ex00/btc
 	@echo
 
 ex01:
 	@make -C ./ex01
 	@echo "\033[0;32m>>>>>>>>> Running RPN\033[0m"
-	@./ex01/ex01
+	@./ex01/RPN
 	@echo
 
 
@@ -19,7 +19,7 @@ ex01:
 ex02:
 	@make -C ./ex02
 	@echo "\033[0;32m>>>>>>>>> Running PmergeMe\033[0m"
-	@./ex02/ex02
+	@./ex02/PmergeMe
 	@echo
 
 
