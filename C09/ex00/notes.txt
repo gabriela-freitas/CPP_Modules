@@ -1,0 +1,7 @@
+using maps in this exercise
+
+maybe: get the data csv file and transform it to a map
+than get the input file and also transform it to a map
+then, do the comparissons
+
+how to parse string date to another data type? without using external libraries?

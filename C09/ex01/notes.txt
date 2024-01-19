@@ -1,0 +1,15 @@
+Use a stack as a Container for this exercise:
+
+Reverse Polish Notation (RPN), also known as postfix notation, is a way of expressing mathematical expressions in which the operators come after their operands. In RPN, you don't need parentheses to indicate the order of operations because the position of the operator determines its scope.
+
+For example, consider the infix expression `(3 + 4) * 5`. In RPN, this expression would be written as `3 4 + 5 *`. Here's how you would evaluate it:
+
+1. Push 3 onto the stack.
+2. Push 4 onto the stack.
+3. Encounter the `+` operator. Pop 3 and 4 from the stack, add them, and push the result (7) back onto the stack.
+4. Push 5 onto the stack.
+5. Encounter the `*` operator. Pop 7 and 5 from the stack, multiply them, and push the result (35) back onto the stack.
+
+The final result is 35.
+
+RPN is popular in computer science and calculators because it eliminates the need for parentheses and provides a straightforward way to evaluate expressions using a stack-based approach.
