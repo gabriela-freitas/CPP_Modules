@@ -48,7 +48,7 @@ int main(int ac, char **av)
 	}
 
 	printBlue(" >> Testing with some valid equations");
-	test("3 4 + 5 6 * /", (3 + 4) / (5 * 6));
+	test("3 4 + 5 6 * /", (3.0 + 4) / (5 * 6));
 	test("3 4 + 5 *", (3 + 4) * 5);
 	test("5 2 - 7 * 3 /", (5 - 2) * 7 / 3);
 	test("4 2 / 3 + 6 *", ((4 / 2) + 3) * 6);
