@@ -5,8 +5,8 @@ all : ex00 ex01 ex02
 ex00:
 	@make -C ./ex00
 	@echo "\033[0;32m>>>>>>>>> Running btc\033[0m"
-	@./ex00/btc
-	@echo
+	@cd ./ex00 && ./btc
+	@cd .. && echo
 
 ex01:
 	@make -C ./ex01
