@@ -3,6 +3,7 @@
 # define __BITCOINEXCHANGE_HPP__
 #include <iostream>
 #include <map>
+#include <ctime>
 #include "InvalidInputExeception.hpp"
 
 class BitcoinExchange {

@@ -5,10 +5,10 @@
 MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
 NAME	=	btc
-SRC = $(wildcard srcs/*.cpp) ../testingUtils.cpp
+SRC = $(wildcard srcs/*.cpp) $(wildcard ../common/srcs/*.cpp)
 CC = c++
 
-INC = -I ./includes -I ../
+INC = -I ./includes -I ../common/includes
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
