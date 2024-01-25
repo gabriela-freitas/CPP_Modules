@@ -12,24 +12,36 @@ std::time_t BitcoinInfo::getDate()
 	return std::mktime(&tm);
 }
 
-// TODO: valid date (i.e 31 feb is not valid)
+bool isValidDate(BitcoinInfo &param)
+{
+	time_t date = param.getDate();
+	std::tm *tm = std::localtime(&(date));
+
+	if (tm->tm_year + 1900 == param.year &&
+		tm->tm_mon + 1 == param.month &&
+		tm->tm_mday == param.day)
+		return true;
+	return false;
+}
 
 void BitcoinInfo::validate(std::string debug, fileType type)
 {
+	if (!isValidDate(*this))
+		throw InvalidInputExeception("Error: invalid date => " + debug);
 	if (this->year < 2009 || this->year > 2024)
-		throw InvalidInputExeception("Invalid year, must be between 2009 and 2024: " + debug);
+		throw InvalidInputExeception("Error: Invalid year, must be between 2009 and 2024 =>" + debug);
 	if (this->month < 1 || this->month > 12)
-		throw InvalidInputExeception("Invalid month: " + debug);
+		throw InvalidInputExeception("Error: Invalid month =>" + debug);
 	if (this->day < 1 || this->day > 31)
-		throw InvalidInputExeception("Invalid day: " + debug);
+		throw InvalidInputExeception("Error: Invalid day =>" + debug);
 	if (type == INPUT)
 	{
 		if (this->value < 1 || this->value > 1000)
-			throw InvalidInputExeception("Invalid value, must be between 1 and 1000: " + debug);
+			throw InvalidInputExeception("Error: Invalid value, must be between 1 and 1000 =>" + debug);
 	}
 	else
 	{
 		if (this->value < 0)
-			throw InvalidInputExeception("Invalid value, must be positive: " + debug);
+			throw InvalidInputExeception("Error: Invalid value, must be positive =>" + debug);
 	}
 }

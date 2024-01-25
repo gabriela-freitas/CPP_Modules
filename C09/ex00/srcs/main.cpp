@@ -2,12 +2,15 @@
 
 
 
-int main(void)
+int main(int ac, char **av)
 {
 	BitcoinExchange bitcoinExchange;
 	try
 	{
-		bitcoinExchange.registerInfomations("input.txt");
+		if (ac == 2)
+			bitcoinExchange.calculateExchangeRate(av[1]);
+		else
+			printRed("Provide a input file");
 	}
 	catch (const std::exception &e)
 	{

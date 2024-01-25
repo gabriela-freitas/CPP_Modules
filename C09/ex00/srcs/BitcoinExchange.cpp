@@ -1,19 +1,12 @@
 
 #include "BitcoinExchange.hpp"
-BitcoinExchange::BitcoinExchange()
-{
+BitcoinExchange::BitcoinExchange(){}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &param){
+	(void)param;
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &param)
-{
-	*this = param;
-}
-
-BitcoinExchange::~BitcoinExchange()
-{
-	std::cout << "BitcoinExchange"
-			  << " destroyed" << std::endl;
-}
+BitcoinExchange::~BitcoinExchange(){}
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &param)
 {
@@ -26,24 +19,21 @@ const BitcoinExchange::fileData &BitcoinExchange::getData() const
 	return (bitcoinPrice);
 }
 
-const BitcoinExchange::InputfileData &BitcoinExchange::getInputData() const
-{
-	return (input);
-}
-
-void BitcoinExchange::registerInfomations(std::string inputFile)
+void BitcoinExchange::calculateExchangeRate(std::string inputFile)
 {
 	parseFile("data.csv", DATA);
 	parseFile(inputFile, INPUT);
 }
 
-void BitcoinExchange::calculateExchangeRate(BitcoinInfo data)
+void BitcoinExchange::calculateAndDisplayResult(BitcoinInfo data)
 {
 	fileData::iterator info;
 	info = bitcoinPrice.lower_bound(data.getDate());
-	if (info->first != data.getDate())
+	if (abs(info->first - data.getDate()) > 86400)
+	{
 		info--;
-	std::cout << data.year << "-" << data.month << "-" << data.day << " => " << info->second << "=>"
+	}
+	std::cout << data.year << "-" << data.month << "-" << data.day << " => " << data.value << " => "
 			  << info->second * data.value << std::endl;
 }
 
@@ -52,7 +42,7 @@ void BitcoinExchange::pushBack(BitcoinInfo info, std::string debug, fileType typ
 	info.validate(debug, type);
 	if (type == INPUT)
 	{
-		calculateExchangeRate(info);
+		calculateAndDisplayResult(info);
 	}
 	else
 		bitcoinPrice[info.getDate()] = info.value;
@@ -79,7 +69,7 @@ int BitcoinExchange::parseFile(std::string fileName, fileType type)
 			try
 			{
 				if (sscanf(line.c_str(), tformat.c_str(), &info.year, &info.month, &info.day, &info.value) != 4)
-					throw InvalidInputExeception("Invalid input: " + line);
+					throw InvalidInputExeception("Error: bad input => " + line);
 
 				pushBack(info, line, type);
 			}
@@ -90,7 +80,6 @@ int BitcoinExchange::parseFile(std::string fileName, fileType type)
 		}
 	}
 	else
-		throw InvalidInputExeception("Could not open file: " + fileName);
+		throw InvalidInputExeception("Error: could not open file: " + fileName);
 	return 1;
 }
-int parseInputFile(void);
