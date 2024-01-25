@@ -2,80 +2,95 @@
 #include "BitcoinExchange.hpp"
 BitcoinExchange::BitcoinExchange()
 {
-	// TODO (default constructor)
 }
+
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &param)
 {
-	// TODO (copy constructor)
-	(void)param;
+	*this = param;
 }
+
 BitcoinExchange::~BitcoinExchange()
 {
 	std::cout << "BitcoinExchange"
 			  << " destroyed" << std::endl;
-	// TODO (destructor)
 }
+
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &param)
 {
-	// TODO (Assignment operatior)
-	// std::swap()
 	(void)param;
 	return (*this);
 }
-std::ostream &operator<<(std::ostream &s, const BitcoinExchange &param)
+
+const BitcoinExchange::fileData &BitcoinExchange::getData() const
 {
-	// s << param.CONST_METHOD()
-	(void)param;
-	return (s);
+	return (bitcoinPrice);
 }
 
-std::time_t getDate(int year, int month, int day, std::string vdate)
+const BitcoinExchange::InputfileData &BitcoinExchange::getInputData() const
 {
-	if (year < 2009 || year > 2024)
-		throw InvalidInputExeception("Invalid year, must be between 2009 and 2024: " + vdate);
-	if (month < 1 || month > 12)
-		throw InvalidInputExeception("Invalid month: " + vdate);
-	if (day < 1 || day > 31)
-		throw InvalidInputExeception("Invalid day: " + vdate);
-	std::tm tm;
-	tm.tm_year = year - 1900;
-	tm.tm_mon = month - 1;
-	tm.tm_mday = day;
-
-	return std::mktime(&tm);
+	return (input);
 }
 
-int parseDataFile(void)
+void BitcoinExchange::registerInfomations(std::string inputFile)
 {
-	int year = 0, month = 0, day = 0;
-	float value = 0;
-	// Open the file
-	std::ifstream inputFile("data.csv");
+	parseFile("data.csv", DATA);
+	parseFile(inputFile, INPUT);
+}
 
-	// Check if the file is open
+void BitcoinExchange::calculateExchangeRate(BitcoinInfo data)
+{
+	fileData::iterator info;
+	info = bitcoinPrice.lower_bound(data.getDate());
+	if (info->first != data.getDate())
+		info--;
+	std::cout << data.year << "-" << data.month << "-" << data.day << " => " << info->second << "=>"
+			  << info->second * data.value << std::endl;
+}
+
+void BitcoinExchange::pushBack(BitcoinInfo info, std::string debug, fileType type)
+{
+	info.validate(debug, type);
+	if (type == INPUT)
+	{
+		calculateExchangeRate(info);
+	}
+	else
+		bitcoinPrice[info.getDate()] = info.value;
+}
+
+int BitcoinExchange::parseFile(std::string fileName, fileType type)
+{
+	BitcoinInfo info;
+	std::ifstream inputFile(fileName.c_str());
+	std::string tformat;
+
+	if (type == INPUT)
+		tformat = "%d-%d-%d | %f";
+	else
+		tformat = "%d-%d-%d,%f";
+
 	if (inputFile.is_open())
 	{
 		std::string line;
-		while (std::getline(inputFile, line))
+		for (int i = 1; std::getline(inputFile, line); i++)
 		{
+			if (i == 1)
+				continue;
 			try
 			{
-				// TODO: skip first line
-				// TODO: add these values to the container
-				if (sscanf(line.c_str(), "%d-%d-%d,%f", &year, &month, &day, &value) != 4)
+				if (sscanf(line.c_str(), tformat.c_str(), &info.year, &info.month, &info.day, &info.value) != 4)
 					throw InvalidInputExeception("Invalid input: " + line);
 
-				// this is only valid on the other file
-				//  if (value < 1 || value > 1000)
-				//  	throw InvalidInputExeception("Invalid value, must be between 1 and 1000: " + vdate);
-				getDate(year, month, day, line);
+				pushBack(info, line, type);
 			}
 			catch (const std::exception &e)
 			{
-				std::cerr << e.what() << '\n';
+				printRed(e.what());
 			}
 		}
 	}
-	throw InvalidInputExeception("Could not open file");
+	else
+		throw InvalidInputExeception("Could not open file: " + fileName);
+	return 1;
 }
 int parseInputFile(void);
