@@ -34,7 +34,7 @@ static bool in_limits(double c)
 	return true;
 }
 
-//TODO: get type function
+// get type function
 // You have to first detect the type of the literal passed as parameter, convert it from
 // string to its actual type, then convert it explicitly to the three other data types. Lastly,
 // display the results as shown below.
@@ -89,7 +89,18 @@ e_type identifyType(std::string literal)
 		else
 			return DOUBLE;
 	}
-	return INT;
+
+	int num;
+	std::stringstream ss;
+	ss << literal;
+	ss >> num;
+
+	ss.str(std::string());
+	ss.clear();
+	ss << num;
+	if (!literal.compare(ss.str()))
+		return INT;
+	return INVALID;
 }
 
 void print(double num)
@@ -106,14 +117,12 @@ void print(double num)
 		std::cout << static_cast<int>(num) << std::endl;
 	else
 		std::cout << "impossible" << std::endl;
-	std::cout << "float: " << std::fixed << std::setprecision(3) << static_cast<float>(num) << "f" << std::endl;
-	std::cout << "double: " << std::fixed << std::setprecision(3) << static_cast<double>(num) << std::endl;
+	std::cout << "float: " << static_cast<float>(num) << "f" << std::endl;
+	std::cout << "double: " << static_cast<double>(num) << std::endl;
 }
 
 void ScalarConverter::converter(std::string literal)
 {
-	identifyType(literal);
-
 	switch (identifyType(literal))
 	{
 		case INT:
@@ -133,7 +142,7 @@ void ScalarConverter::converter(std::string literal)
 			break;
 		case DOUBLE:
 			std::cout << ">> Type is: DOUBLE <<" << std::endl;
-			print(atof(literal.c_str()));
+			print(strtod(literal.c_str(), NULL));
 			break;
 		case INVALID:
 			std::cout << "INVALID INPUT" << std::endl;
