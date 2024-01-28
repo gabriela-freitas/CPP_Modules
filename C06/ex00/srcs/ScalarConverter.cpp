@@ -8,20 +8,25 @@
 #include <algorithm>
 #include <iomanip>
 
-ScalarConverter::ScalarConverter() {
+ScalarConverter::ScalarConverter()
+{
 	std::cout << "Default constructor called" << std::endl;
 }
 
-ScalarConverter::ScalarConverter(const ScalarConverter& param) {
+ScalarConverter::ScalarConverter(const ScalarConverter &param)
+{
 	(void)param;
 	std::cout << "Copy constructor called" << std::endl;
 }
 
-ScalarConverter::~ScalarConverter() {
-	std::cout << "ScalarConverter" << " destroyed" << std::endl;
+ScalarConverter::~ScalarConverter()
+{
+	std::cout << "ScalarConverter"
+			  << " destroyed" << std::endl;
 }
 
-ScalarConverter& ScalarConverter::operator= (const ScalarConverter& param) {
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &param)
+{
 	(void)param;
 	return (*this);
 }
@@ -55,17 +60,12 @@ e_type identifyType(std::string literal)
 {
 	if (literal.size() == 1 && !std::isdigit(literal[0]))
 		return CHAR;
-	if ((std::count(literal.begin(), literal.end(), '-')
-			+ std::count(literal.begin(), literal.end(), '+')
-			+ std::count(literal.begin() + 1, literal.end(), '+')
-			+ std::count(literal.begin() + 1, literal.end(), '-')) > 1)
+	if ((std::count(literal.begin(), literal.end(), '-') + std::count(literal.begin(), literal.end(), '+') + std::count(literal.begin() + 1, literal.end(), '+') + std::count(literal.begin() + 1, literal.end(), '-')) > 1)
 		return INVALID;
-	if (std::count(literal.begin(), literal.end(), '.') > 1
-		|| *literal.begin() == '.'
-		|| *literal.rbegin() == '.')
+	if (std::count(literal.begin(), literal.end(), '.') > 1 || *literal.begin() == '.' || *literal.rbegin() == '.')
 		return INVALID;
 
-	if (!literal.compare("-inf") || !literal.compare("+inf") || !literal.compare("nan") || !literal.compare("inf") )
+	if (!literal.compare("-inf") || !literal.compare("+inf") || !literal.compare("nan") || !literal.compare("inf"))
 		return DOUBLE;
 	if (!literal.compare("-inff") || !literal.compare("+inff") || !literal.compare("inff") || !literal.compare("nanf"))
 		return FLOAT;
@@ -80,12 +80,15 @@ e_type identifyType(std::string literal)
 			return INVALID;
 	}
 
-	if (std::count(literal.begin(), literal.end(), '.') == 1
-		&& *literal.begin() != '.'
-		&& *literal.rbegin() != '.')
+	if (std::count(literal.begin(), literal.end(), '.') == 1 && *literal.begin() != '.' && *literal.rbegin() != '.')
 	{
-		if (std::count(literal.begin(), literal.end(), 'f') == 1 && *literal.rbegin() == 'f')
-			return FLOAT;
+		if (std::count(literal.begin(), literal.end(), 'f') == 1)
+		{
+			if (*literal.rbegin() == 'f')
+				return FLOAT;
+			else
+				return INVALID;
+		}
 		else
 			return DOUBLE;
 	}
@@ -97,6 +100,8 @@ e_type identifyType(std::string literal)
 
 	ss.str(std::string());
 	ss.clear();
+	if (literal[0] == '+')
+		ss << '+';
 	ss << num;
 	if (!literal.compare(ss.str()))
 		return INT;
@@ -113,11 +118,11 @@ void print(double num)
 		std::cout << "impossible" << std::endl;
 
 	std::cout << "int: ";
-	if (in_limits<int>(num)&& !std::isnan(num))
+	if (in_limits<int>(num) && !std::isnan(num))
 		std::cout << static_cast<int>(num) << std::endl;
 	else
 		std::cout << "impossible" << std::endl;
-	std::cout << "float: " << static_cast<float>(num) << "f" << std::endl;
+	std::cout << "float: " << std::fixed << std::setprecision(2) << static_cast<float>(num) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(num) << std::endl;
 }
 
@@ -125,29 +130,29 @@ void ScalarConverter::converter(std::string literal)
 {
 	switch (identifyType(literal))
 	{
-		case INT:
-			std::cout << ">> Type is: INT <<" << std::endl;
-			if (!in_limits<int>(atof(literal.c_str())))
-				std::cout << "Integer overflow" << std::endl;
-			else
-				print(atof(literal.c_str()));
-			break;
-		case FLOAT:
-			std::cout << ">> Type is: FLOAT <<" << std::endl;
+	case INT:
+		std::cout << ">> Type is: INT <<" << std::endl;
+		if (!in_limits<int>(atof(literal.c_str())))
+			std::cout << "Integer overflow" << std::endl;
+		else
 			print(atof(literal.c_str()));
-			break;
-		case CHAR:
-			std::cout << ">> Type is: CHAR <<" << std::endl;
-			print((double)literal[0]);
-			break;
-		case DOUBLE:
-			std::cout << ">> Type is: DOUBLE <<" << std::endl;
-			print(strtod(literal.c_str(), NULL));
-			break;
-		case INVALID:
-			std::cout << "INVALID INPUT" << std::endl;
-			break;
-		default:
-			break;
+		break;
+	case FLOAT:
+		std::cout << ">> Type is: FLOAT <<" << std::endl;
+		print(atof(literal.c_str()));
+		break;
+	case CHAR:
+		std::cout << ">> Type is: CHAR <<" << std::endl;
+		print((double)literal[0]);
+		break;
+	case DOUBLE:
+		std::cout << ">> Type is: DOUBLE <<" << std::endl;
+		print(strtod(literal.c_str(), NULL));
+		break;
+	case INVALID:
+		std::cout << "INVALID INPUT" << std::endl;
+		break;
+	default:
+		break;
 	}
 }

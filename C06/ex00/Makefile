@@ -4,7 +4,7 @@
 
 # MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
-NAME	=	ex00
+NAME	=	convert
 SRC	=	$(wildcard srcs/*.cpp)
 CC = c++
 

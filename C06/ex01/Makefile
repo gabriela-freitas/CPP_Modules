@@ -4,7 +4,7 @@
 
 MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
-NAME	=	ex01
+NAME	=	serializer
 SRC	=	$(wildcard srcs/*.cpp)
 CC = c++
 
