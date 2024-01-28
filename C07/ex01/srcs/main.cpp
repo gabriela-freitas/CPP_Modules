@@ -1,5 +1,5 @@
 #include "iter.hpp"
-
+#include "testing.hpp"
 
 //Turn in a main.cpp file that contains your tests. Provide enough code to generate a
 // test executable.

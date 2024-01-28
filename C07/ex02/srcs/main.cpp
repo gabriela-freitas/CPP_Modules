@@ -6,16 +6,15 @@
 
 int returnRand(int i)
 {
-    return std::rand() % MAX_VAL + i;
+    return (std::rand() % MAX_VAL) + i;
 }
 
-//TODO: this file was in the subject
 int main(int, char**)
 {
 	std::cout << "\033[1;34mTesting in a int array: \033[0m" << std::endl;
 
-    Array<int> intArr(std::rand() % MAX_VAL);
 	std::srand(std::time(0));
+    Array<int> intArr((std::rand() % MAX_VAL) + 2);
     iter(&intArr[0], intArr.size(), &returnRand);
 
     Array<int> otherArr(intArr);

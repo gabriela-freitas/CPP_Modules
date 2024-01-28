@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string.h>
 #include <cstdlib>
 #include <ctime>
@@ -18,19 +17,6 @@ void print(array *arr, unsigned int len)
         std::cout << *(arr + it) << " ";
     }
     std::cout << std::endl;
-}
-
-template <typename array>
-void iter(array *arr, unsigned int len, typename FunctionPointer<array>::type func)
-{
-    std::cout << "Before: ";
-    print(arr, len);
-    for (unsigned int it = 0; it < len; it++)
-    {
-        *(arr + it) = func(1);
-    }
-    std::cout << "After: ";
-    print(arr, len);
 }
 
 template <typename T>
