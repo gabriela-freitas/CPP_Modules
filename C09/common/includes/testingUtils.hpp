@@ -26,7 +26,7 @@ Container &seedContainerRandomNumbers(Container &container, size_t n)
     // std::srand(std::time(0));
     for (size_t i = 0; i < n; i++)
     {
-        int RandNumber = (std::rand() % (n * 10)) + 1;
+        int RandNumber = (std::rand() % (n * 100)) + 1;
         container.push_back(RandNumber);
     }
     return container;
