@@ -40,27 +40,17 @@ void print(Iterator begin, Iterator end)
 	std::cout << std::endl;
 }
 
-void insertionSort(Iterator begin, Iterator end) {
-	Iterator i;
+void insertionSort(Iterator begin, Iterator end)
+{
+	int key;
 	Iterator j;
-	int tempVal;
-
-	std::cout << "<<<<<" << std::endl;
-	print(begin, end);
-	for (i = begin + 1; i < end; i++) {
-		tempVal = *i;
-		j = i - 1;
-
-		while (*j > tempVal) {
-			*(j + 1) = *j;
-			j--;
-			if (j == begin)
-				break ;
-		}
-
-		*(j + 1) = tempVal;
+	for (Iterator i = begin + 1; i < end; i++)
+	{
+		key = *(i + 1);
+		for (j = i + 1; j > begin && *(j - 1) > key; j--)
+			*j = *(j - 1);
+		*j = key;
 	}
-	print(begin, end);
 }
 
 // void insertionSort(Iterator begin, Iterator end)
@@ -84,14 +74,15 @@ void insertionSort(Iterator begin, Iterator end) {
 // into a single sorted subarray.
 // This function is commonly used in sorting algorithms like Merge Sort.
 
-void merge(Cont &v, Iterator begin, Iterator half, Iterator end)
+void merge(Cont &original, Iterator begin, Iterator half, Iterator end)
 {
 	Iterator it;
 	Iterator pos;
 	int i = 0;
 
+	Cont v(begin, half);
 	Cont temp(half, end);
-	v.erase(half, end);
+
 	for (it = temp.begin(); it != temp.end(); it++, i++)
 	{
 		pos = std::lower_bound(v.begin(), v.end(), *it);
@@ -102,21 +93,34 @@ void merge(Cont &v, Iterator begin, Iterator half, Iterator end)
 		else
 			v.insert(pos, *it);
 	}
+	for (it = begin, pos ; it != end; it++)
+	{
+		*it = 
+	}
 }
 
 void sort(Cont &v, Iterator begin, Iterator end)
 {
 	std::size_t distance = std::distance(begin, end);
-	if (distance > 5)
+	if (distance > 2)
 	{
 		Iterator half = begin + (distance / 2);
+		printBlue(">>>");
+		print(begin, half);
+		print(half, end);
 		sort(v, begin, half); // does sort of first half
 		sort(v, half, end);	  // does sort on second half
 		merge(v, begin, half, end);
 	}
 	else
 	{
-		insertionSort(begin, end);
+		if (*begin > *end)
+		{
+			int temp = *begin;
+			*begin = *end;
+			*end = temp;
+		}
+		// insertionSort(begin, end);
 	}
 }
 
@@ -124,7 +128,14 @@ int main()
 {
 	Cont a;
 
-	seedContainerRandomNumbers(a, 20);
+	// seedContainerRandomNumbers(a, 20);
+	a.push_back(9);
+	a.push_back(8);
+	a.push_back(7);
+	a.push_back(6);
+	a.push_back(5);
+	a.push_back(4);
+	a.push_back(3);
 	print(a);
 	sort(a, a.begin(), a.end());
 	print(a);
