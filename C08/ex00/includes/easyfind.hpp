@@ -16,7 +16,7 @@
 // pected.
 
 template <typename T>
-typename T::iterator easyfind(T container, int target)
+typename T::iterator easyfind(T &container, int target)
 {
     return (std::find(container.begin(), container.end(), target));
 }

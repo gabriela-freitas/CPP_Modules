@@ -1,5 +1,6 @@
 #include "MutantStack.hpp"
 #include "testingUtils.hpp"
+#include <vector>
 #define SIZE 42
 
 int main(void)
@@ -9,21 +10,21 @@ int main(void)
 	printBlue(" >> Generating the MutantStack");
 
 	MutantStack<int> mStack;
-	std::stringstream mStackContent;
+	std::string mStackContent;
 
 	// just making sure i can use push to add elements
 	mStack.push(1024);
-	mStackContent = containerTosStream(seedContainerRandomNumbers(mStack, SIZE));
-	std::cout << mStackContent.str() << std::endl;
+	mStackContent = containerToStr(seedContainerRandomNumbers(mStack, SIZE));
+	std::cout << mStackContent << std::endl;
 
 	printYellow(" >> Now Creating an identical Vector");
 	std::vector<int> vector;
-	std::stringstream vectorContent;
+	std::string vectorContent;
 	seedSecondContainer(mStack, vector);
-	vectorContent = containerTosStream(vector);
+	vectorContent = containerToStr(vector);
 
 	printBlue(" >> Making sure their content is the same");
-	if (!mStackContent.str().compare(vectorContent.str()))
+	if (!mStackContent.compare(vectorContent))
 		printGreen("Their content is equal!!!");
 	else
 		printRed("Hmmm something is off");

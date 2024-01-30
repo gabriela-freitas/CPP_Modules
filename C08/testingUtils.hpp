@@ -32,18 +32,18 @@ Container &seedContainerRandomNumbers(Container &container, size_t n)
     return container;
 }
 
-// Function to send the Container content to stringStream
+// Function to send the Container content to string
 template <typename Container>
-std::stringstream containerTosStream(Container &container)
+std::string containerToStr(Container &container)
 {
     typedef typename Container::iterator iterator;
-    std::stringstream sstream;
+    std::stringstream ss;
 
     for (iterator it = container.begin(); it != container.end(); it++)
     {
-        sstream << *it << " ";
+        ss << *it << " ";
     }
-    return sstream;
+    return ss.str();
 }
 
 // Function to copy the content of one container to another
