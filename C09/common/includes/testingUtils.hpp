@@ -81,3 +81,19 @@ void print(T &cont)
 	}
 	std::cout << std::endl;
 }
+
+// Function to print a colored string in green and container
+template <typename T>
+void printGreen(const std::string& text, T& cont) {
+    std::cout << "\033[1;32m" << text;
+    print(cont);
+    std::cout << "\033[0m";
+}
+
+// Function to print a colored string in green and container
+template <typename T>
+void printYellow(const std::string& text, T& cont) {
+    std::cout << "\033[1;33m" << text;
+    print(cont);
+    std::cout << "\033[0m";
+}

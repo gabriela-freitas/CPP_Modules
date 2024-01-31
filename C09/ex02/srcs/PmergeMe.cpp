@@ -2,13 +2,64 @@
 #include "PmergeMe.hpp"
 #include "InvalidInputExeception.hpp"
 
+static void mergeInsertionSort(std::list<int> &A);
+static void mergeInsertionSort(std::vector<int> &A, int p, int r);
+
+std::string PmergeMe::sort(std::vector<int> &vector)
+{
+	std::clock_t start, end;
+	start = clock();
+	mergeInsertionSort(vector, 0, vector.size() - 1);
+	// Recording the end clock tick.
+	end = clock();
+	// Calculating total time taken by the program.
+	double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+	std::stringstream ss;
+	ss << "Time to process a range of " << vector.size()
+	   << " elements with std::vector: " << std::fixed
+	   << time_taken;
+	ss << " sec ";
+	if (!is_sorted(vector))
+		throw InvalidInputExeception("Failed to sort with std::vector");
+	return ss.str();
+}
+
+std::string PmergeMe::sort(std::list<int> &list)
+{
+	std::clock_t start, end;
+	start = clock();
+	mergeInsertionSort(list);
+	// Recording the end clock tick.
+	end = clock();
+	// Calculating total time taken by the program.
+	double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+	std::stringstream ss;
+	ss << "Time to process a range of " << list.size()
+	   << " elements with std::list: " << std::fixed
+	   << time_taken;
+	ss << " sec ";
+	if (!is_sorted(list))
+		throw InvalidInputExeception("Failed to sort with std::list");
+	return ss.str();
+}
+
 PmergeMe::PmergeMe()
 {
+	std::srand(std::time(0));
+	printBlue("Generating random sequence:");
+	seedContainerRandomNumbers(vector, 42);
+	seedSecondContainer(vector, list);
+	printGreen("Before: ", vector);
+	std::string res = sort(vector);
+	printYellow("After: ", vector);
+	std::cout << res << std::endl;
+	std::cout << sort(list);
+	std::cout << std::endl;
+	std::cout << std::endl;
 }
 
 PmergeMe::PmergeMe(char **numbers)
 {
-
 	while (numbers && *numbers)
 	{
 		std::stringstream ss;
@@ -18,43 +69,37 @@ PmergeMe::PmergeMe(char **numbers)
 		ss >> number;
 		check << number;
 
-		if (check.str().compare(ss.str()))
-			throw InvalidInputExeception("Invalid");
+		if (check.str().compare(ss.str()) || number < 0)
+			throw InvalidInputExeception("Error");
 
 		vector.push_back(number);
 		list.push_back(number);
 		numbers++;
 	}
-	sort(vector);
-	sort(list);
+	printGreen("Before: ", vector);
+	std::string res = sort(vector);
+	printYellow("After: ", vector);
+	std::cout << res << std::endl;
+	std::cout << sort(list);
+	std::cout << std::endl;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &param)
 {
-	// TODO (copy constructor)
 	(void)param;
 }
+
 PmergeMe::~PmergeMe()
 {
-	std::cout << "PmergeMe"
-			  << " destroyed" << std::endl;
-	// TODO (destructor)
 }
+
 PmergeMe &PmergeMe::operator=(const PmergeMe &param)
 {
-	// TODO (Assignment operatior)
-	// std::swap()
 	(void)param;
 	return (*this);
 }
-std::ostream &operator<<(std::ostream &s, const PmergeMe &param)
-{
-	// s << param.CONST_METHOD()
-	(void)param;
-	return (s);
-}
 
-void merge(std::vector<int> &A, int p, int q, int r)
+static void merge(std::vector<int> &A, int p, int q, int r)
 {
 	std::vector<int> firstHalf(A.begin() + p, A.begin() + q + 1);
 	std::vector<int> secondHalf(A.begin() + q + 1, A.begin() + r + 1);
@@ -87,7 +132,7 @@ void merge(std::vector<int> &A, int p, int q, int r)
 	}
 }
 
-void insertionSort(std::vector<int> &A, int p, int q)
+static void insertionSort(std::vector<int> &A, int p, int q)
 {
 	for (int i = p; i < q; i++)
 	{
@@ -102,7 +147,7 @@ void insertionSort(std::vector<int> &A, int p, int q)
 	}
 }
 
-void mergeInsertionSort(std::vector<int> &A, int p, int r)
+static void mergeInsertionSort(std::vector<int> &A, int p, int r)
 {
 	if (r - p > 5)
 	{
@@ -117,30 +162,23 @@ void mergeInsertionSort(std::vector<int> &A, int p, int r)
 	}
 }
 
-void PmergeMe::sort(std::vector<int> &vector)
-{
-	mergeInsertionSort(vector, 0, vector.size() - 1);
-	if (is_sorted(vector))
-		printGreen("SORTED!");
-	else
-		printRed("NOT SORTED :(((");
-}
 
-std::list<int>::iterator next(std::list<int>::iterator it)
+
+static std::list<int>::iterator next(std::list<int>::iterator it)
 {
 	std::list<int>::iterator newIt = it;
 	std::advance(newIt, 1);
 	return newIt;
 }
 
-std::list<int>::iterator prev(std::list<int>::iterator it)
+static std::list<int>::iterator prev(std::list<int>::iterator it)
 {
 	std::list<int>::iterator newIt = it;
 	std::advance(newIt, -1);
 	return newIt;
 }
 
-void insertionSort(std::list<int> &myList)
+static void insertionSort(std::list<int> &myList)
 {
 	for (std::list<int>::iterator it = next(myList.begin()); it != myList.end(); ++it)
 	{
@@ -157,7 +195,7 @@ void insertionSort(std::list<int> &myList)
 	}
 }
 
-void mergeInsertionSort(std::list<int> &A)
+static void mergeInsertionSort(std::list<int> &A)
 {
 	if (A.size() > 5)
 	{
@@ -174,13 +212,4 @@ void mergeInsertionSort(std::list<int> &A)
 	{
 		insertionSort(A);
 	}
-}
-
-void PmergeMe::sort(std::list<int> &list)
-{
-	mergeInsertionSort(list);
-	if (is_sorted(list))
-		printGreen("SORTED!");
-	else
-		printRed("NOT SORTED :(((");
 }

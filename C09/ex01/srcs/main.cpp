@@ -34,7 +34,7 @@ void test(std::string equation, double expectedResult)
 	double result;
 
 	result = test(equation);
-	printResult(abs(result - expectedResult) < 0.00001);
+	printResult(std::abs(result - expectedResult) < 0.00001);
 }
 
 int main(int ac, char **av)

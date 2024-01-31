@@ -23,5 +23,5 @@ void printBlue(const std::string& text) {
 
 void printGray(const std::string &text)
 {
-    std::cout << "\033[1;30m" << text << "\033[0m" << std::endl;
+    std::cout << "\033[1;40m" << text << "\033[0m" << std::endl;
 }

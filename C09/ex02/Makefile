@@ -2,7 +2,7 @@
 
 # C++ ex02 [Thu Jan 18 23:57:29 WET 2024]
 
-MAKEFLAGS += --silent	# Silence makefile [Commented by default]
+# MAKEFLAGS += --silent	# Silence makefile [Commented by default]
 
 NAME	=	PmergeMe
 SRC = $(wildcard srcs/*.cpp) $(wildcard ../common/srcs/*.cpp)
@@ -20,7 +20,7 @@ COLOUR_GREY=\033[1;30m
 COLOUR_END=\033[0m
 
 $(NAME): $(OBJS) $(SRC)
-		@ $(CC) $(FLAGS) $(INC) $(SRC) $(LIB) -o $(NAME)
+		$(CC) $(FLAGS) $(INC) $(SRC) $(LIB) -o $(NAME)
 		@echo "$(COLOUR_GREEN) >> $(NAME) is ready to use $(COLOUR_END)"
 
 all : $(NAME)

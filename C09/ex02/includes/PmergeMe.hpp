@@ -16,10 +16,10 @@ public:
 	PmergeMe(const PmergeMe &);
 	~PmergeMe();
 	PmergeMe &operator=(const PmergeMe &);
-	void sort(std::vector<int> &vector);
-	void sort(std::list<int> &list);
 
 private:
+	std::string sort(std::vector<int> &vector);
+	std::string sort(std::list<int> &list);
 	template <typename T>
 	bool is_sorted(T cont)
 	{
@@ -39,5 +39,4 @@ private:
 	std::vector<int> vector;
 	std::list<int> list;
 };
-std::ostream &operator<<(std::ostream &, const PmergeMe &);
 #endif

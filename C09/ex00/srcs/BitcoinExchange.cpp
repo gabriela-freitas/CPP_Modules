@@ -29,7 +29,7 @@ void BitcoinExchange::calculateAndDisplayResult(BitcoinInfo data)
 {
 	fileData::iterator info;
 	info = bitcoinPrice.lower_bound(data.getDate());
-	if (abs(info->first - data.getDate()) > 86400)
+	if (std::abs(info->first - data.getDate()) > 86400)
 	{
 		info--;
 	}
