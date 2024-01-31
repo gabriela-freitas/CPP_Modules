@@ -26,7 +26,7 @@ Container &seedContainerRandomNumbers(Container &container, size_t n)
     // std::srand(std::time(0));
     for (size_t i = 0; i < n; i++)
     {
-        int RandNumber = (std::rand() % (n * 100)) + 1;
+        int RandNumber = (std::rand() % (n * 10)) + 1;
         container.push_back(RandNumber);
     }
     return container;
@@ -56,4 +56,28 @@ void seedSecondContainer(Container1 &source, Container2 &dest)
     {
         dest.push_back(*it);
     }
+}
+
+
+//print functions
+template <typename Iterator>
+void print(Iterator begin, Iterator end)
+{
+	for (Iterator it = begin; it != end; it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+}
+
+template <typename T>
+void print(T &cont)
+{
+	typename T::iterator it;
+
+	for (it = cont.begin(); it != cont.end(); it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
 }

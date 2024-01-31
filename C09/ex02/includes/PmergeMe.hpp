@@ -11,6 +11,7 @@
 class PmergeMe
 {
 public:
+	PmergeMe(char **numbers);
 	PmergeMe();
 	PmergeMe(const PmergeMe &);
 	~PmergeMe();
@@ -19,21 +20,24 @@ public:
 	void sort(std::list<int> &list);
 
 private:
-	void sortPairs(std::pair<int, int> &pair);
-	std::vector<int> &insert(std::vector<int> &a, std::vector<int> &b);
-	std::list<int> &insert(std::list<int> &a, std::list<int> &b);
 	template <typename T>
 	bool is_sorted(T cont)
 	{
 		typename T::iterator it;
+		typename T::iterator next;
 
-		for (it = cont.begin(); it != cont.end() - 1; it++)
+		it = cont.begin();
+		next = it; 
+		next++;
+		for (; next != cont.end(); it++, next++)
 		{
-			if (*it > *(it + 1))
+			if (*it > *(next))
 				return false;
 		}
 		return true;
 	}
+	std::vector<int> vector;
+	std::list<int> list;
 };
 std::ostream &operator<<(std::ostream &, const PmergeMe &);
 #endif
